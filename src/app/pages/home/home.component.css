@@ -1,0 +1,155 @@
+.custom-card {
+  border-radius: 0;
+  border: none;
+}
+.card-body {
+  padding: 0 !important;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: sticky;
+  top: 56px; /* Adjust this based on the height of your toolbar */
+  z-index: 999; 
+  background-color: white; /* Ensure the tabs background remains visible */
+}
+
+/* Optional: Styling for the tabs */
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.nav-item {
+  margin: 0 16px;
+}
+
+/* Content container to allow scrolling */
+.content {
+  height: calc(100vh - 105.6px); /* Adjust this based on the combined height of toolbar and tabs */
+  overflow-y: auto;
+  box-sizing: border-box;
+  scrollbar-width: none;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.router-outlet-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  /* scrollbar-width: none; */
+}
+
+
+.main-home-container {
+  width: 100%;
+}
+
+.container {
+  padding: 0%;
+}
+
+.theme-toggle {
+  display: flex;
+  margin-left: 10px;
+}
+
+.example-spacer {
+  flex: 1;
+  text-align: center;
+  word-break: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.title-style {
+  font-weight: bold;
+}
+
+mat-sidenav-container {
+  height: calc(100vh - 56px); /* Adjust height based on toolbar */
+}
+
+mat-sidenav {
+  width: 200px;
+}
+
+/* Media queries for responsive design */
+@media (min-width: 600px) {
+  .main-home-container {
+    width: 80%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 700px) {
+  .main-home-container {
+    width: 70%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 800px) {
+  .main-home-container {
+    width: 60%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 900px) {
+  .main-home-container {
+    width: 45%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1100px) {
+  .main-home-container {
+    width: 40%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 1300px) {
+  .main-home-container {
+    width: 30%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+
+ 

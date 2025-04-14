@@ -1,0 +1,10 @@
+.input-style{
+    height: 60px;
+    width: 100%;
+    min-width: 130px;
+}
+.input-style-50{
+    height: 50px;
+    width: 100%;
+    min-width: 130px;
+}

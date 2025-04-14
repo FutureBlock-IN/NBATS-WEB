@@ -1,0 +1,106 @@
+.events-container {
+    max-width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border-top: 1px solid #ccc;
+    border-radius: 8px;
+    height: 75vh;
+    overflow: auto;
+    scrollbar-width: none;
+  }
+
+  .loading-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  /* Custom Tabs Styles */
+  .custom-tabs {
+    width: 100%;
+  }
+
+  .custom-tabs ::ng-deep .mat-mdc-tab-header {
+    margin-bottom: 20px;
+  }
+
+  .custom-tabs ::ng-deep .mat-mdc-tab-body-wrapper {
+    margin-top: -20px;
+  }
+
+  .custom-tabs ::ng-deep .mat-mdc-tab {
+    min-width: 120px;
+    padding: 0 16px;
+    /* height: 48px; */
+  }
+
+  .custom-tabs ::ng-deep .mat-mdc-tab .mdc-tab__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .custom-tabs ::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+  }
+
+  .custom-tabs ::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: #000;
+    font-weight: 600;
+  }
+
+  .custom-tabs ::ng-deep .mat-mdc-tab:not(.mdc-tab--active):hover .mdc-tab__text-label {
+    color: #000;
+    opacity: 0.8;
+  }
+
+  /* Dark Mode Styles */
+  :host-context(.dark) .custom-tabs ::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+    color: #666;
+  }
+
+  :host-context(.dark) .custom-tabs ::ng-deep .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: #666;
+    font-weight: 600;
+  }
+
+  :host-context(.dark) .custom-tabs ::ng-deep .mat-mdc-tab:not(.mdc-tab--active):hover .mdc-tab__text-label {
+    color: #ffffff;
+    opacity: 0.8;
+  }
+
+  /* Dark Mode - Participant Details Tab Only */
+  :host-context(.dark) .custom-tabs ::ng-deep .mat-mdc-tab:first-child.mdc-tab--active .mdc-tab__text-label {
+    color: white;
+    font-weight: 600;
+  }
+
+  .custom-tabs ::ng-deep .mat-mdc-tab-header-pagination {
+    display: none !important;
+  }
+
+  /* Responsive Tab Styles */
+  @media (max-width: 768px) {
+    .custom-tabs ::ng-deep .mat-mdc-tab {
+      min-width: 100px;
+      padding: 0 12px;
+    }
+
+    .custom-tabs ::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+      font-size: 13px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .custom-tabs ::ng-deep .mat-mdc-tab {
+      min-width: 80px;
+      padding: 0 8px;
+    }
+
+    .custom-tabs ::ng-deep .mat-mdc-tab .mdc-tab__text-label {
+      font-size: 12px;
+    }
+  }

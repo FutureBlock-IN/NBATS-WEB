@@ -1,0 +1,20 @@
+<div class="dialog-container ">
+  <div class="pop-up-content "[ngClass]="themeSignal.themeSignal() === 'dark' ? 'dark-bg':'light-bg'">
+    <img *ngIf="data.showImage" [src]="handleImageUrl(data.imageUrl)" class="profile-image-list" />
+    <div class="name"  [ngClass]="themeSignal.themeSignal() === 'dark' ? 'light-color':'dark-color'">{{data.name}}</div>
+    <p class="check-action-message" [ngClass]="themeSignal.themeSignal() === 'dark' ? 'light-color':'dark-color'">{{ data.message }}</p>
+    
+    <div *ngIf="data.type === 'action'; else singleButton">
+      <div class="save-button-checkout">
+        <button [ngClass]="themeSignal.themeSignal() === 'dark' ? 'dark-color light-bg':'light-color dark-bg'" (click)="cancelAction()">Cancel</button>
+        <button [ngClass]="themeSignal.themeSignal() === 'dark' ? 'dark-color light-bg':'light-color dark-bg'" (click)="confirmAction()">Confirm</button>
+      </div>
+    </div>
+
+    <ng-template #singleButton>
+      <div class="save-button-checkout" [ngClass]="themeSignal.themeSignal() === 'dark'?'dark-bg':'light-bg'">
+        <button [ngClass]="themeSignal.themeSignal() === 'dark' ? 'dark-color light-bg':'light-color dark-bg'" (click)="closeDialog()">Okay</button>
+      </div>
+    </ng-template>
+  </div>
+</div>

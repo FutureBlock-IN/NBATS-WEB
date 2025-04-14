@@ -1,0 +1,542 @@
+.content {
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+  position: sticky;
+  top: 64px;
+  scrollbar-width: none;
+}
+
+ 
+
+.load-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.title {
+  font-weight: bold !important;
+}
+
+.title-container {
+  height: 50px;
+}
+
+.title-container p {
+  font-size: 20px;
+  text-align: center;
+}
+
+.events-list-container {
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+
+}
+
+.list-container {
+  padding-top: 10px;
+  /* padding: 1rem; */
+  overflow: visible;
+  height: 450px;
+  scrollbar-width: none;
+}
+
+.event-card-wrapper {
+  width: 100%;
+}
+
+
+.empty-container {
+  /* margin-top: -210px; */
+  text-align: center;
+  overflow: visible;
+   
+}
+
+
+#empty-container-table{
+  margin-top: -240px;
+  font-size: 16px;
+  font-weight: 500;
+  /* margin-bottom: 10px; */
+
+}
+
+.custom-height {
+  height: auto;
+  min-height: 460px;
+  scrollbar-width: none;
+}
+
+.details-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px;
+  margin-bottom: 10px;
+}
+
+.event-details {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+}
+
+.nav-container {
+  text-align: center;
+}
+
+.nav-bar {
+  display: inline-flex;
+  justify-content: center;
+  list-style: none;
+}
+
+.nav-link.active {
+  font-weight: bold;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.logo-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-image {
+  width: auto;
+  height: 25vh;
+  max-width: 60%;
+  object-fit: contain;
+}
+
+.organization-title {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+.organization-create-date {
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #333;
+}
+
+/* General Styles for Dropdown Container */
+select {
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  padding: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  color: #333;
+  width: 44%;
+  outline: none;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  /* margin-left: 80px; */
+}
+
+select:hover {
+  border-color: #888;
+}
+
+select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+option {
+  font-size: 14px;
+  padding: 10px;
+  background-color: #fff;
+  color: #000;
+}
+
+select:active,
+select:focus-visible {
+  background-color: #fff;
+}
+
+option[disabled] {
+  color: #aaa;
+}
+
+@media (max-width: 768px) {
+  select {
+    font-size: 14px;
+    padding: 8px;
+  }
+  option {
+    font-size: 12px;
+  }
+}
+
+.font-schedule {
+  font-size: 1rem;
+  font-weight: bold;
+  /* color: #333; */
+}
+
+.select-title {
+  margin-left: 180px;
+}
+
+#btn-close {
+  margin-left: 350px;
+  position: sticky;
+  margin-top: -100px;
+}
+
+.profile-image-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.event-card-wrapper {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.event-card-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-card-container:hover {
+  transition: cubic-bezier(1, 0, 0, 1);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-card-wrapper {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.table-container {
+  margin: 20px auto;
+  padding: 10px;
+  max-width: 1000px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  overflow: visible;
+  margin-top: -470px;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+
+.table th {
+  background-color: #e0e0e0;
+  color: rgb(56, 56, 56);
+  font-weight: bold;
+
+  padding: 12px;
+  text-align: left;
+}
+
+.table td {
+  padding: 10px;
+  text-align: left;
+  color: #333;
+}
+
+.table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.table tr:hover {
+  background-color: #e1f5fe;
+}
+
+.table th:first-child,
+.table td:first-child {
+  border-top-left-radius: 8px;
+}
+
+.table th:last-child,
+.table td:last-child {
+  border-top-right-radius: 8px;
+}
+
+.table th,
+.table td {
+  border: 1px solid #ddd;
+}
+
+.table thead {
+  border-bottom: 2px solid #838383;
+}
+
+.table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: 8px;
+}
+
+.table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: 8px;
+}
+
+.btn-view {
+  margin-left: 20px;
+}
+
+.view-toggle {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  font-size: 13px;
+  margin-left: 20px;
+  gap: 7px;
+}
+
+.view-toggle label {
+  cursor: pointer;
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .select-title {
+    margin-left: 10px;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  select {
+    font-size: 12px;
+    padding: 8px;
+    width: 100%;
+  }
+
+  .organization-title {
+    font-size: 1rem;
+  }
+
+  .view-toggle label {
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  .select-title {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  select {
+    width: 100%;
+    font-size: 12px;
+  }
+
+  /* .view-toggle {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  } */
+  .view-toggle label {
+    display: block;
+    margin-bottom: 8px;
+  }
+}
+
+.font-schedule {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 1200px) {
+  select {
+    width: 44%;
+  }
+  .select-title {
+    margin-left: 180px;
+  }
+  #btn-close {
+    margin-left: 350px;
+  }
+}
+
+@media screen and (max-width: 1199px) and (min-width: 769px) {
+  select {
+    width: 50%;
+  }
+  .select-title {
+    margin-left: 120px;
+  }
+  #btn-close {
+    margin-left: 250px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .events-list-container {
+    height: auto;
+    min-height: calc(100vh - 150px);
+    padding: 15px;
+  }
+
+  .event-card-wrapper {
+    margin-bottom: 20px;
+    width: 100%;
+  }
+
+  .content.custom-card {
+    min-height: 150px;
+    padding: 15px;
+  }
+
+  .profile-image-container {
+    margin: 15px 0;
+  }
+
+  .organization-title {
+    font-size: 1.2rem;
+    margin: 10px 0;
+  }
+
+  .select-title {
+    padding: 0 15px;
+    margin-bottom: 15px;
+  }
+
+  select {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .events-list-container {
+    min-height: 300px;
+    padding: 10px;
+  }
+
+  .content.custom-card {
+    min-height: 180px;
+  }
+
+  .organization-title {
+    font-size: 1.1rem;
+  }
+
+  .font-schedule {
+    font-size: 1rem;
+  }
+
+  .view-toggle {
+    flex-direction: row;
+    justify-content: center;
+    margin: 15px 0;
+  }
+
+  .view-toggle label {
+    margin: 0 10px;
+  }
+
+  .table-container {
+    overflow-x: auto;
+    margin: 10px 0;
+  }
+
+  .table {
+    min-width: 500px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  select {
+    width: 95%;
+    padding: 6px;
+  }
+  .select-title {
+    margin-left: 10px;
+  }
+  #btn-close {
+    margin-left: 40px;
+    margin-top: -50px;
+  }
+}
+
+@media screen and (max-width: 768px) and (orientation: landscape) {
+  .select-title {
+    margin-left: 40px;
+  }
+  select {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  #btn-close {
+    margin-left: 0;
+    margin-right: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 14px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #btn-close {
+    margin-left: 0;
+    margin-right: 0;
+    font-size: 12px;
+  }
+
+  #btn-close i {
+    font-size: 14px;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  #btn-close {
+    margin-left: 350px;
+    margin-top: -100px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .view-toggle {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #btn-close {
+    display: none;
+  }
+}
+
+
+
+
+
+ 

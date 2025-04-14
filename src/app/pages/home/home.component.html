@@ -1,0 +1,49 @@
+<div class="card custom-card">
+  <div class="card-body nav-container">
+    <ul class="nav nav-underline">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/home/events"
+          routerLinkActive="active-tab"
+          (click)="setCurrentTab('events')"
+          >Events</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/home/staff"
+          routerLinkActive="active-tab"
+          (click)="setCurrentTab('staff')"
+          >Staff</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/home/participants"
+          routerLinkActive="active-tab"
+          (click)="setCurrentTab('participants')"
+          >Participants</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/dashboard"
+          routerLinkActive="active-tab"
+          (click)="setCurrentTab('participants')"
+          >Dashboard</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="content">
+  <!-- <div class="scroll-container"> -->
+  <div class="router-outlet-container">
+    <router-outlet></router-outlet>
+  </div>
+  <!-- </div> -->
+</div>

@@ -1,0 +1,81 @@
+<div class="content custom-card">
+  <div class="title-container">
+    <p class="fw-medium m-0 title font-style">Event Activity</p>
+  </div>
+
+  <div class="details-container">
+    <span class="event-details">Event on: {{ displayDateAndTime() }}</span>
+  </div>
+
+  <div class="nav-container">
+    <ul class="nav-bar nav-underline">
+      <li class="nav-item" *ngFor="let step of steps; let i = index">
+        <a
+          href="#"
+          class="nav-link"
+          [class.active]="selectedIndex === i"
+          (click)="onClick(i); $event.preventDefault()"
+        >
+          <span>{{ step.label }}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Dynamic content based on selected tab -->
+  <div *ngIf="steps[selectedIndex]" class="position-relative">
+    <ng-container
+      [ngTemplateOutlet]="steps[selectedIndex].content"
+    ></ng-container>
+  </div>
+</div>
+
+<!-- Participant Template -->
+<ng-template #participantTemplate>
+  <div class="load-container" *ngIf="loading">
+    <div class="custom-loader"></div>
+  </div>
+
+  <div *ngIf="!loading">
+    <div
+      [ngClass]="
+        participants.length > 0
+          ? 'list-container'
+          : 'd-flex justify-content-center align-items-center custom-height'
+      "
+    >
+      <app-user-activity-card
+        *ngFor="let participant of participants"
+        [user]="participant"
+      ></app-user-activity-card>
+      <div class="empty-container" *ngIf="participants.length === 0">
+        <p class="m-0">No Activity Found</p>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<!-- Staff Template -->
+<ng-template #staffTemplate>
+  <div class="load-container" *ngIf="loading">
+    <div class="custom-loader"></div>
+  </div>
+
+  <div *ngIf="!loading">
+    <div
+      [ngClass]="
+        staff.length > 0
+          ? 'list-container'
+          : 'd-flex justify-content-center align-items-center custom-height'
+      "
+    >
+      <app-user-activity-card
+        *ngFor="let staff of staff"
+        [user]="staff"
+      ></app-user-activity-card>
+      <div class="empty-container" *ngIf="staff.length === 0">
+        <p class="m-0">No Activity Found</p>
+      </div>
+    </div>
+  </div>
+</ng-template>

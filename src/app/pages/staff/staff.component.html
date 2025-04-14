@@ -1,0 +1,50 @@
+
+<div *ngIf="isLoading" class="custom-card">
+  <div>Loading...</div>
+</div>
+
+<div *ngIf="!isLoading" class="custom-card">
+  <div
+    class="custom-card"
+    *ngIf="!(areStaffAvailable | async); else staffList"
+  >
+    <img
+      src="../../../assets/images/emptyStatePlaceholder.png"
+      class="empty-state-image mode-sensitive-image"
+    />
+    <div class="empty-state-text">No staff here yet!</div>
+    <button (click)="navigateToAddStaff()" class="add-staff-button">
+      Add Staff
+    </button>
+  </div>
+</div>
+
+
+<ng-template #staffList>
+  <div class="staff-list-container list-background-color">
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input custom-search-input"
+        placeholder="Search Staff"
+        [(ngModel)]="searchTerm"
+      />
+      <span class="search-icon"><mat-icon>search</mat-icon></span>
+    </div>
+    <div
+      class="staff-card-wrapper"
+      *ngFor="let staff of filteredParticipants()"
+    >
+      <app-user-card
+        [firstName]="staff.firstName"
+        [lastName]="staff.lastName"
+        [logoUrl]="staff.logoUrl"
+        [createdOn]="staff.createdOn"
+        (click)="navigateToStaffDetails(staff.id.toString())"
+      >
+      </app-user-card>
+      
+    </div>
+  </div>
+  <hr>
+</ng-template>

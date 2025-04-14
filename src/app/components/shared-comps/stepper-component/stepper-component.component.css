@@ -1,0 +1,35 @@
+.nav-container {
+    width: 100%;
+  }
+  
+  .nav {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    width: 100%;
+  }
+  
+  .nav-item {
+    flex: 1;
+    display: flex;
+  }
+  
+  .nav-link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    height: auto; /* Allow height to adjust based on content */
+    min-height: 80px; /* Minimum height for each tab */
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: background-color 0.3s, color 0.3s;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+  }
+

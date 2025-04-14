@@ -1,0 +1,28 @@
+<div class="landing-page-container">
+  <div *ngIf="isLoading" class="custom-loader-container">
+    <div class="custom-loader"></div>
+  </div>
+
+  <div class="landing-content">
+    <div class="app-title">
+      <img
+        src="assets/images/EntryZaLogo_light.png"
+        alt="Entry Zap Logo"
+        class="logo"
+      />
+      <!-- <h1 class="m-0">Zap In - Zap Out</h1> -->
+    </div>
+
+    <div class="greetings">
+      <div class="welcome-row">
+        <!-- <h2 class="display-4">It's That Easy!</h2> -->
+        <button
+          class="btn btn-primary btn-lg"
+          (click)="UserRegistrationAuth0()"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

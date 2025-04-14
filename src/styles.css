@@ -1,0 +1,300 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Quicksand", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif !important;
+}
+
+button {
+  border-radius: 10px !important;
+}
+
+.tab-heading {
+  font-weight: 600 !important;
+}
+
+.font-style {
+  font-family: "poppins" sans-serif !important;
+}
+
+.mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+  position: sticky;
+  top: 56px;
+  z-index: 999;
+  width: 100%;
+}
+
+.custom-loader {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+.custom-stepper .mat-step-label {
+  white-space: normal;
+  text-overflow: clip;
+  overflow: visible;
+  display: block;
+  line-height: 1.2;
+  width: 100%;
+  text-align: center;
+  word-wrap: break-word;
+}
+
+.custom-stepper .mat-horizontal-stepper-header-container {
+  height: auto;
+}
+
+.custom-stepper .mat-horizontal-stepper-header {
+  height: auto;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.custom-stepper .mat-stepper-label-position-bottom .mat-step-label {
+  margin-top: 8px;
+}
+
+.no-last-line .mat-step-header:last-child .mat-stepper-horizontal-line {
+  display: none !important;
+}
+
+.done-step {
+  color: #109F31 !important;
+  font-weight: 600;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.mat-horizontal-stepper-header {
+  padding: calc((var(--mat-stepper-header-height) - 24px) / 2) 10px !important;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header-container {
+  margin: 0 auto;
+}
+
+.custom-stepper .mat-horizontal-stepper-header {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.custom-stepper .mat-step-icon {
+  width: 50px;
+  height: 50px;
+  font-size: 24px;
+  line-height: 50px;
+  margin-bottom: 8px;
+}
+
+.custom-stepper .mat-horizontal-stepper-header .mat-step-icon {
+  margin-top: 0;
+}
+
+.custom-stepper .mat-horizontal-stepper-header .mat-step-label {
+  font-size: 16px;
+  white-space: normal;
+  text-overflow: clip;
+  overflow: visible;
+  display: block;
+  line-height: 1.2;
+  width: 100%;
+  word-wrap: break-word;
+  margin-top: 4px;
+}
+.custom-stepper .mat-step-label {
+  text-align: center;
+  white-space: normal; /* Allows wrapping */
+  word-wrap: break-word; /* Ensures that the text wraps within the container */
+  font-size: 14px; /* Adjust the size as needed */
+  line-height: 1.2; /* Adjusts spacing between lines */
+  display: inline-block;
+  max-width: 150px; /* Set a max width for the label container */
+}
+
+.custom-stepper .mat-step-icon {
+  margin-bottom: 8px; /* Space between icon and label */
+}
+
+.custom-stepper .mat-stepper-horizontal .mat-step-label {
+  width: 100%;
+}
+
+
+.custom-stepper .mat-horizontal-stepper-header-container {
+  height: auto;
+}
+
+.custom-stepper .mat-horizontal-stepper-header:not(:first-child)::before,
+.custom-stepper .mat-horizontal-stepper-header:not(:last-child)::after {
+  top: 25px;
+  height: 1px;
+  background-color: #f9f9f900;
+  border-top-color: transparent;
+}
+
+.custom-stepper .mat-horizontal-stepper-header::before,
+.custom-stepper .mat-horizontal-stepper-header::after {
+  top: 45px !important;
+  height: 1px;
+  background-color: #f9f9f900;
+  content: '';
+  z-index: -9999 !important;
+  position: absolute;
+  width: 100% !important;
+}
+
+.mat-stepper-label-position-bottom .mat-stepper-horizontal-line {
+  top: 45px !important;
+  border-top-color: transparent;
+}
+
+.custom-stepper .mat-step-icon {
+  z-index: 2;
+}
+
+.required {
+  color: red;
+}
+
+.custom-stepper .mat-horizontal-stepper-header::before {
+  left: -50%;
+}
+
+.custom-stepper .mat-horizontal-stepper-header::after {
+  left: 50%;
+}
+
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header .mat-step-label {
+  padding: 0% !important;
+}
+
+/* Target the last horizontal line specifically */
+.custom-stepper .mat-horizontal-stepper-header-container .mat-stepper-horizontal-line:last-child {
+  display: none !important;
+  width: 0 !important;
+}
+
+/* Hide any potential pseudo-elements on the last step header */
+.custom-stepper .mat-horizontal-stepper-header-container .mat-step-header:last-child::after,
+.custom-stepper .mat-horizontal-stepper-header-container .mat-step-header:last-child::before {
+  display: none !important;
+}
+
+.p-dropdown {
+  width: 100% !important;
+}
+
+@media (max-width: 2000px) {
+  .two-steps-padding {
+    padding: 0 150px;
+  }
+}
+
+@media (max-width: 1500px) {
+  .two-steps-padding {
+    padding: 0 150px;
+  }
+}
+
+@media (max-width: 1400px) {
+  .two-steps-padding {
+    padding: 0 150px;
+  }
+}
+
+@media (max-width: 1300px) {
+  .two-steps-padding {
+    padding: 0 150px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .two-steps-padding {
+    padding: 0 150px;
+  }
+}
+
+@media (max-width: 1100px) {
+  .two-steps-padding {
+    padding: 0 200px;
+  }
+}
+
+@media (max-width: 1000px) {
+  .two-steps-padding {
+    padding: 0 150px;
+  }
+}
+
+@media (max-width: 900px) {
+  .two-steps-padding {
+    padding: 0 100px;
+  }
+}
+
+@media (max-width: 800px) {
+  .two-steps-padding {
+    padding: 0 80px;
+  }
+}
+
+@media (max-width: 700px) {
+  .two-steps-padding {
+    padding: 0 60px;
+  }
+}
+
+@media (max-width: 600px) {
+  .two-steps-padding {
+    padding: 0 50px;
+  }
+
+  @media(max-width:450px) {
+    .p-inputtext {
+      font-size: 15px !important;
+      font-weight: 500;
+    }
+  }
+
+  @media(max-width:420px) {
+    .p-inputtext {
+      font-size: 15px !important;
+      font-weight: 500;
+    }
+  }
+}

@@ -1,0 +1,22 @@
+<!-- user-selector.component.html -->
+<div class="assign-section my-5">
+    <div class="assign-title">
+      <p class="fw-medium ps-5">{{ itemType | titlecase }}</p>
+    </div>
+    <div class="assigning-containers">
+      <app-item-selector
+        [items]="users"
+        [isLoading]="isLoading"
+        [defaultImageUrl]="defaultImageUrl"
+        [itemType]="itemType"
+        [noItemsMessage]="noItemsMessage"
+        (select)="addUserToSelected($event)"
+      ></app-item-selector>
+    </div>
+  </div>
+  
+  <!-- Add Save Changes Button for Editing -->
+  <div *ngIf="eventId">
+    <button class="navigate-btn" (click)="saveChanges()">Save Changes</button>
+  </div>
+  

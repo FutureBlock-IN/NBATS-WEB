@@ -1,0 +1,49 @@
+.container {
+  height: calc(100vh - 65px);
+  margin: 0 auto;
+  padding: 10px;
+}
+
+p {
+  font-size: 19px;
+  margin: 0;
+  font-weight: bold;
+  text-align: center;
+}
+
+.profile-image-list{
+  margin-top: 60px;
+  width: 200px !important;
+  height: 200px !important;
+}
+.welcome-text {
+  font-size: 35px;
+  color: #817474; 
+  margin-top: 10px; 
+  font-weight: 400;
+  margin-bottom: 10px; 
+  align-items: center !important;
+}
+.name{
+  align-items: center;
+}
+.save-button {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+  border-radius: 0;
+  position: absolute;
+  column-gap: 50px;
+  bottom: 0;
+  left: 0;
+}
+
+.save-button>button {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  border: none; 
+  cursor: pointer; 
+}
+

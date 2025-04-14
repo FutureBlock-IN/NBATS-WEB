@@ -1,0 +1,262 @@
+<div class="container custom-card">
+  <form [formGroup]="staffForm">
+    <div class="form-group">
+      <label for="fileUpload">Upload File</label>
+      <div class="upload-container">
+        <span
+          id="fileMessage"
+          [ngClass]="{
+            'file-message': true,
+            'file-message-centered': selectedFileName
+          }"
+        >
+          {{
+            selectedFileName
+              ? selectedFileName.length > 50
+                ? selectedFileName.slice(0, 40) + "..."
+                : selectedFileName
+              : "JPEG, JPG, PNG, Max 3mb"
+          }}
+        </span>
+        <input
+          type="file"
+          id="fileUpload"
+          #fileUpload
+          (change)="onFileSelected($event)"
+          hidden
+        />
+        <button
+          type="button"
+          id="chooseFileButton"
+          (click)="fileUpload.click()"
+        >
+          Choose File
+        </button>
+      </div>
+      <div *ngIf="fileErrorMessage" class="text-danger">
+        {{ fileErrorMessage }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name<span class="required">*</span></label>
+      <div class="name-container">
+        <div class="firstname-container">
+          <input
+            type="text"
+            class="firstName"
+            formControlName="firstName"
+            placeholder="FIRSTNAME"
+            required
+          />
+          <div
+            *ngIf="
+              staffForm.get('firstName')?.touched &&
+              staffForm.get('firstName')?.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="staffForm.get('firstName')?.errors?.['required']">
+              {{ validationMessages.firstName.required }}
+            </div>
+            <div *ngIf="staffForm.get('firstName')?.errors?.['maxlength']">
+              {{ validationMessages.firstName.maxlength }}
+            </div>
+          </div>
+        </div>
+        <div class="firstname-container">
+          <input
+            type="text"
+            class="lastName"
+            formControlName="lastName"
+            placeholder="LASTNAME"
+            required
+          />
+          <div
+            *ngIf="
+              staffForm.get('lastName')?.touched &&
+              staffForm.get('lastName')?.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="staffForm.get('lastName')?.errors?.['required']">
+              {{ validationMessages.lastName.required }}
+            </div>
+            <div *ngIf="staffForm.get('lastName')?.errors?.['maxlength']">
+              {{ validationMessages.lastName.maxlength }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email<span class="required">*</span></label>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="EMAIL"
+        required
+      />
+      <div
+        *ngIf="
+          staffForm.get('email')?.touched && staffForm.get('email')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="staffForm.get('email')?.errors?.['required']">
+          {{ validationMessages.email.required }}
+        </div>
+        <div *ngIf="staffForm.get('email')?.errors?.['email']">
+          {{ validationMessages.email.email }}
+        </div>
+        <div *ngIf="staffForm.get('email')?.errors?.['maxlength']">
+          {{ validationMessages.email.maxlength }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone<span class="required">*</span></label>
+      <input type="tel" formControlName="phone" placeholder="PHONE" required />
+      <div
+        *ngIf="
+          staffForm.get('phone')?.touched && staffForm.get('phone')?.invalid
+        "
+        class="text-danger"
+      >
+        <small *ngIf="staffForm.get('phone')?.hasError('required')">
+          {{ validationMessages.phone.required }}
+        </small>
+        <small
+          *ngIf="
+            !staffForm.get('phone')?.hasError('required') &&
+            staffForm.get('phone')?.hasError('invalidPhoneNumber')
+          "
+        >
+          {{ validationMessages.phone.pattern }}
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address<span class="required">*</span></label>
+      <input
+        type="text"
+        formControlName="address"
+        placeholder="ADDRESS"
+        required
+      />
+      <div
+        *ngIf="
+          staffForm.get('address')?.touched && staffForm.get('address')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="staffForm.get('address')?.errors?.['required']">
+          {{ validationMessages.address.required }}
+        </div>
+        <div *ngIf="staffForm.get('address')?.errors?.['maxlength']">
+          {{ validationMessages.address.maxlength }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group location-container">
+      <div style="flex: 1">
+        <label for="city">City<span class="required">*</span></label>
+        <input type="text" formControlName="city" placeholder="CITY" required />
+        <div
+          *ngIf="
+            staffForm.get('city')?.touched && staffForm.get('city')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="staffForm.get('city')?.errors?.['required']">
+            {{ validationMessages.city.required }}
+          </div>
+          <div *ngIf="staffForm.get('city')?.errors?.['maxlength']">
+            {{ validationMessages.city.maxlength }}
+          </div>
+        </div>
+      </div>
+
+      <div style="flex: 1">
+        <label for="state">State<span class="required">*</span></label>
+        <app-state-selector
+          [selectedStateIso2]="staffForm.get('state')?.value"
+          (stateChange)="onStateChange($event)"
+        ></app-state-selector>
+      </div>
+
+      <div style="flex: 1">
+        <label for="zip">Zip<span class="required">*</span></label>
+        <input type="text" formControlName="zip" placeholder="ZIP" required />
+        <div
+          *ngIf="staffForm.get('zip')?.touched && staffForm.get('zip')?.invalid"
+          class="text-danger"
+        >
+          <div *ngIf="staffForm.get('zip')?.errors?.['required']">
+            {{ validationMessages.zip.required }}
+          </div>
+          <div *ngIf="staffForm.get('zip')?.errors?.['pattern']">
+            {{ validationMessages.zip.pattern }}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Role</label>
+      <div class="toggle-tabs">
+        <div
+          class="toggle-tab"
+          [class.active]="staffForm.get('role')?.value === 'admin'"
+          (click)="staffForm.get('role')?.setValue('admin')"
+        >
+          Admin
+        </div>
+        <div
+          class="toggle-tab"
+          [class.active]="staffForm.get('role')?.value === 'staff'"
+          (click)="staffForm.get('role')?.setValue('staff')"
+        >
+          Staff
+        </div>
+      </div>
+    </div>
+    <div style="font-weight: bold">Events</div>
+    <hr />
+    <div class="events-list-card">
+      <app-item-selector
+        [items]="events"
+        [defaultImageUrl]="'../../../../assets/images/eventPlaceholder.jpg'"
+        [isLoading]="isLoadingEvents"
+        itemType="event"
+        [noItemsMessage]="{
+          title: 'No Events',
+          description: 'No Events'
+        }"
+        [showSearchBar]="false"
+        [showAddButton]="false"
+        (select)="onEventSelect($event)"
+      ></app-item-selector>
+    </div>
+    <hr />
+
+    <div [ngClass]="isStaffCreating ? 'navigate-btn' : 'save-button'">
+      <button
+        type="submit"
+        (click)="onSubmitStaff()"
+        [disabled]="staffForm.invalid || isStaffCreating"
+      >
+        <ng-container *ngIf="!isStaffCreating">
+          Save
+          <!-- <i class="fas fa-arrow-right"></i> -->
+        </ng-container>
+        <ng-container *ngIf="isStaffCreating">
+          <i class="fas fa-spinner fa-spin"></i> Saving...
+        </ng-container>
+      </button>
+    </div>
+  </form>
+</div>

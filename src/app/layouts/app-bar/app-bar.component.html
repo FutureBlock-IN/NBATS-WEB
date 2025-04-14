@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="main-home-container custom-border-theme">
+    <div class="scroll-container">
+      <mat-toolbar class="toolbar">
+        <ng-container *ngIf="iconType == ''">
+          <img
+            [src]="
+              themeService.themeSignal() === 'dark'
+                ? 'assets/images/EntryZapLogo_Dark.ico'
+                : 'assets/images/EntryZaLogo_light.ico'
+            "
+            width="70"
+            height="70"
+            alt="Entry Zap Logo"
+            class="logo"
+            (click)="navigateToHomePage()"
+          />
+        </ng-container>
+
+        <ng-container *ngIf="iconType !== ''">
+          <mat-icon mat-icon-button (click)="goBack()" [fontIcon]="iconType">
+          </mat-icon>
+        </ng-container>
+
+        <span class="example-spacer title-style tab-heading">{{
+          titleName
+        }}</span>
+        <mat-icon
+          *ngIf="showAddIcon"
+          mat-icon-button
+          (click)="handleAddIconClick()"
+          class="icon-space"
+          >add_circle_outline</mat-icon
+        >
+
+        <img
+          *ngIf="logoImageUrl && showLogoImage"
+          class="logo-image icon-space"
+          [src]="logoImageUrl"
+          alt="Logo Image"
+          (click)="navigateToNewPage()"
+        />
+      </mat-toolbar>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

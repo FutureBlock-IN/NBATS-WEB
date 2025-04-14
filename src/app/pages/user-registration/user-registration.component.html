@@ -1,0 +1,22 @@
+<div class="main-auth-container">
+    <div class="form-box">
+      <div class="wrapper">
+        <h2>Registration</h2>
+        <form (ngSubmit)="onSubmit()">
+          <div class="input-group">
+            <input type="text" required [(ngModel)]="name" name="name">
+            <label>Name</label>
+          </div>
+          <div class="input-group">
+            <p><mat-slide-toggle [(ngModel)]="isAttendee" name="isAttendee">Attendee</mat-slide-toggle></p>
+          </div>
+          <div class="input-group" *ngIf="!isAttendee">
+            <input type="text" [(ngModel)]="ownerOrganization" name="ownerOrganization">
+            <label>Organization Name</label>
+          </div>
+          <div class="hint" *ngIf="!isAttendee">Leave blank if you are an attendee</div>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>

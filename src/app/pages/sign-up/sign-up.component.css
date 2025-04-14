@@ -1,0 +1,350 @@
+.sign-up-container{
+  height: 100%;
+}
+
+.loader-placeholder-container{
+  position: absolute;
+  z-index: 999;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.sign-up-container::-webkit-scrollbar {
+  display: none;
+}
+/* Hide scrollbar for IE, Edge, and Firefox */
+.sign-up-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.progress-indicator {
+  width: 100%;
+  height: 10%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 10px;
+}
+.step-block {
+  height: 15px;
+  width: 150px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: center;
+}
+.organization-title {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+}
+.otp-title {
+  width: 100%;
+  text-align: center;
+}
+.input-title {
+  width: 100%;
+  text-align: left;
+  padding-left: 30px;
+  margin-bottom: 3px;
+}
+.spacer {
+  height: 4px;
+}
+.upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 10px;
+  height: 60px;
+  margin-left: 30px;
+  margin-right: 30px;
+}
+.img-error-container{
+  margin-left: 30px;
+  margin-right: 30px;
+  text-align: start;
+}
+
+.upload-container #fileMessage {
+  flex: 1;
+  padding-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.file-message-centered {
+  text-align: center;
+  font-weight: bold; 
+  color: #333 !important;
+}
+
+.upload-container button {
+  padding: 3px 7px;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 12px;
+
+}
+
+.default-input {
+  width: 100%;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+input {
+  width: 100%;
+  height: 50px;
+}
+
+.save-button {
+  width: 100%;
+  position: relative;
+  bottom: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  margin-top: 20px; /* Added margin to create space between fields and buttons */
+}
+.save-button button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 30%;
+  font-size: 20px;
+  font-weight: 500;
+}
+.save-button-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  column-gap: 10px;
+  padding-bottom: 1em;
+}
+.form-container {
+  width: 100%;
+}
+.otp-container{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.resend-verify-container{
+    padding-bottom: 30px;
+    margin-bottom: 100px;
+}
+/* sign-up.component.css */
+.otp-input-container {
+  text-align: center;
+}
+.otp-input {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  column-gap: 15px;
+}
+.save-button>p{
+  font-size: 15px;
+  font-weight: 400;
+}
+.otp-boxes {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+/* Style for the hidden input */
+input[type="text"][maxlength="5"] {
+  opacity: 0;
+  position: absolute;
+}
+.r-v-btns{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 30%;
+    font-size: 20px;
+    font-weight: 500;
+}
+.fs-2 {
+  font-size: calc(1rem + .9vw) !important;
+}
+.Location-address-zip-container{
+  display: flex;
+  justify-content: center;
+  padding: 10px 30px;
+  column-gap: 10px;
+  margin-bottom: 20px;
+}
+
+@media (max-width: 600px) {
+  .save-button button {
+    width: 80%; 
+    font-size: 16px;
+  }
+
+  .Location-address-zip-container {
+    flex-direction: column;
+    row-gap: 10px;
+  }
+}
+.LAZ-container{
+  flex: 1;
+}
+
+.sign-in{
+  cursor: pointer;
+}
+
+@media (max-height: 745px) {
+  .save-button {
+    position: relative;
+  }
+}
+
+@media (min-width: 600px) {
+  .sign-up-container {
+    width: 80%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (min-width: 700px) {
+  .sign-up-container {
+    width: 70%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (min-width: 800px) {
+  .sign-up-container {
+    width: 60%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (min-width: 900px) {
+  .sign-up-container {
+    width: 70%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (min-width: 1100px) {
+  .sign-up-container {
+    width: 60%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (min-width: 1300px) {
+  .sign-up-container {
+    width: 50%;
+  }
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+@media (min-width: 1200px) {
+  .fs-2 {
+      font-size: 1.4rem !important;
+  }
+}
+
+
+ /* Display the inputs side by side */
+ 
+
+.default-input_p {  
+  width: 100%;  
+} 
+
+ /* Make the container use flexbox */
+.primaryContact {
+  display: flex; /* Arrange children (Food and Juices) side by side */
+  justify-content: space-between; /* Optional: Adds space between Food and Juices */
+  
+  display: grid;
+  padding-left: 10px;
+  padding-right: 10px;
+  column-gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+/* Optional: Style for Food and Juices */
+.firstName_, .lastName_ {
+  flex: 1; /* Both will take equal width */   
+  padding: 10px  
+}
+
+.name-container {
+  width: 100%;
+  display: flex;
+  padding-left: 30px;
+  padding-right: 30px;
+  column-gap: 10px;
+}
+
+.name-field {
+  flex: 1;
+}
+
+.name-field .input-title {
+  width: 100%;
+  text-align: left;
+  padding-left: 0;
+  margin-bottom: 3px;
+}
+
+.name-field input {
+  width: 100%;
+  height: 50px;
+}
+
+.name-field small {
+  display: block;
+  margin-top: 5px;
+}
+
+
+ 
+ 
+ 

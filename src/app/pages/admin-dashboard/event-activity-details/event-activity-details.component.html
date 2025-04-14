@@ -1,0 +1,206 @@
+
+  <div class="content custom-card">
+    <!-- <div class="sticky-"> -->
+     <div class="title-container">
+       <p class="fw-medium m-0 title font-style">Activity</p>
+     </div>
+   
+     <div class="profile-image-container" >
+       <p class="organization-title">
+         {{ title?.title }}
+       </p>
+     </div>
+   
+     <div
+       class="select-title"
+       style="display: flex; align-items: center; gap: 5px"
+     >
+       <p class="organization-title">
+         <span class="font-schedule">Select Event </span>
+       </p>
+       <select (change)="onEventSelect($event)">
+        <option value="" selected>Select Dates</option>
+        <option
+          class="custom-font-size-d m-0"
+          *ngFor="let schedule of eventSchedule"
+          [value]="schedule.eventId + ',' + schedule.formattedDate"
+        >
+          {{ schedule.formattedDate }} &nbsp;&nbsp;{{
+            schedule.formattedStartTime
+          }}
+          - {{ schedule.formattedEndTime }}
+        </option>
+      </select>
+       <div class="view-toggle">
+         <label>
+           <input
+             type="radio"
+             (change)="setView('card')"
+             [checked]="currentView === 'card'"
+           />
+           Card View
+         </label>
+         <label>
+           <input
+             type="radio"
+             (change)="setView('table')"
+             [checked]="currentView === 'table'"
+           />
+           Table View
+         </label>
+       </div>
+     </div>
+   <!-- </div> -->
+   
+    
+      <hr>
+
+
+  
+
+      <div class="nav-container">
+        <ul class="nav-bar nav-underline">
+          <li class="nav-item" *ngFor="let step of steps; let i = index">
+            <a
+              href="#"
+              class="nav-link"
+              [class.active]="selectedIndex === i"
+              (click)="onClick(i); $event.preventDefault()"
+            >
+              <span>{{ step.label }}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <hr />
+      
+   </div>
+        
+    
+    <div *ngIf="steps[selectedIndex]" class="">
+      <ng-container
+        [ngTemplateOutlet]="steps[selectedIndex].content"
+      ></ng-container>  
+      
+    <!-- Participant -->
+    <ng-template #participantTemplate>
+      <div class="load-container" *ngIf="loading">
+        <div class="custom-loader"></div>
+      </div>
+    
+      <div *ngIf="!loading" class="events-list-container list-background-color">
+        <div
+          [ngClass]="
+            participants.length > 0
+              ? 'list-container'
+              : 'd-flex justify-content-center align-items-center custom-height'
+          "
+        >
+          <div
+            *ngIf="currentView === 'card'"
+            class="events-list-container"
+          >
+            <div class="event-card-wrapper" *ngFor="let participant of participants">
+              <app-user-activity-details-card
+                [user]="participant"
+              ></app-user-activity-details-card>                
+            </div>         
+                    
+            <div class="empty-container" *ngIf="participants.length === 0">       
+             <p class="m-0">No Activity Found</p>
+            </div>
+          </div>      
+        </div>
+      </div> 
+       
+    <div class="table" *ngIf="currentView === 'table'">
+     <div class="table-container" *ngIf="participants.length > 0">
+       <table class="table table-bordered">
+         <thead>
+           <tr>
+             <th>Name</th>
+             <th>checkInTime</th>
+             <th>checkOutTime</th>
+             <th>Role</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let participant of participants">
+             <td>{{ participant.organzationUser.firstName }}</td>
+             <td>{{ formatTime(participant.checkInTime) }}</td>
+             <td>
+               {{ participant.checkOutTime ? formatTime(participant.checkOutTime) : "N/A" }}
+             </td>
+             <td>{{ participant.eventUser.role }}</td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
+     <div class="empty-container" id="empty-container-table" *ngIf="participants.length === 0">
+       <p class="m-0">No Activity Found</p>
+     </div>
+   </div>
+    </ng-template>
+
+
+    <!-- Staff -->
+    <ng-template #staffTemplate>
+      <div class="load-container" *ngIf="loading">
+        <div class="custom-loader"></div>
+      </div>
+    
+      <div *ngIf="!loading" class="events-list-container list-background-color">
+        <div
+          [ngClass]="
+            staff.length > 0
+              ? 'list-container'
+              : 'd-flex justify-content-center align-items-center custom-height'
+          "
+        >
+          <!-- Card View -->
+          <div
+            *ngIf="currentView === 'card'"
+            class="events-list-container list-background-color"
+          >
+            <div class="event-card-wrapper" *ngFor="let staff of staff">
+              <app-user-activity-details-card
+                [user]="staff"
+              ></app-user-activity-details-card>
+            </div>
+            <div class="empty-container" *ngIf="staff.length === 0">
+              <p class="m-0">No Activity Found</p>
+            </div>
+          </div>     
+        </div>
+      </div>
+   
+      <!-- Table View -->
+      <div class="table" *ngIf="currentView === 'table'">
+        <div class="table-container" *ngIf="staff.length > 0">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>checkInTime</th>
+                <th>checkOutTime</th>
+                <th>Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let staff of staff">
+                <td>{{ staff.organzationUser.firstName }}</td>
+                <td>{{ formatTime(staff.checkInTime) }}</td>
+                <td>
+                  {{ staff.checkOutTime ? formatTime(staff.checkOutTime) : "N/A" }}
+                </td>
+                <td>{{ staff.eventUser.role }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="empty-container" id="empty-container-table" *ngIf="staff.length === 0">
+          <p class="m-0">No Activity Found</p>
+        </div>
+      </div>
+    </ng-template>
+  

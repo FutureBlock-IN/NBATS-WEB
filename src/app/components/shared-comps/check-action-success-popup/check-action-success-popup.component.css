@@ -1,0 +1,66 @@
+.dialog-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+button {
+  border-radius: 10px;
+}
+.pop-up-content {
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  width: 350px;
+}
+.dark-bg {
+  background: #333;
+}
+.light-bg {
+  background: white;
+}
+.dark-color {
+  color: #333;
+}
+.light-color {
+  color: white;
+}
+.profile-image-list {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+}
+
+.name {
+  font-size: 29px;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.check-action-message {
+  font-size: 25x;
+  margin-top: 10px;
+  font-weight: 700;
+  margin-bottom: 30px;
+}
+
+.save-button-checkout {
+  border-radius: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  column-gap: 70px;
+}
+
+.save-button-checkout > button {
+  padding: 10px;
+  font-size: 20px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+}

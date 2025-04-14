@@ -1,0 +1,52 @@
+<div class="card custom-card">
+  <div class="card-body nav-container">
+    <ul class="nav nav-underline">
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/home/events"
+          routerLinkActive="active-tab"
+          [class.active-tab]="currentTab === 'home'"
+          (click)="onClick(0)"
+          >Home</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/dashboard/events"
+          routerLinkActive="active-tab"
+          [class.active-tab]="currentTab === 'events'"
+          (click)="onClick(1)"
+          >Events</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/dashboard/staff"
+          routerLinkActive="active-tab"
+          [class.active-tab]="currentTab === 'staff'"
+          (click)="onClick(2)"
+          >Staff</a
+        >
+      </li>
+      <li class="nav-item">
+        <a
+          class="nav-link"
+          routerLink="/dashboard/participants"
+          routerLinkActive="active-tab"
+          [class.active-tab]="currentTab === 'participants'"
+          (click)="onClick(3)"
+          >Participants</a
+        >
+      </li>
+    </ul>
+  </div>
+</div>
+<div class="content">  
+  <div class="router-outlet-container">
+    <router-outlet></router-outlet>
+  </div>
+  
+</div>

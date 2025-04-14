@@ -1,0 +1,116 @@
+<div class="content custom-card">
+  <!-- <div class="sticky-"> -->
+   <div class="title-container">
+     <p class="fw-medium m-0 title font-style">Staff Activity</p>
+   </div>
+ 
+   <div class="profile-image-container" >
+     <p class="organization-title">
+       {{ participant?.firstName }} {{ participant?.lastName }}
+     </p>
+   </div>
+ 
+   <div
+     class="select-title"
+     style="display: flex; align-items: center; gap: 5px"
+   >
+     <p class="organization-title">
+       <span class="font-schedule">Select Event </span>
+     </p>
+     <select (change)="onStaffSelect($event)">
+       <option value="" selected>Select Event</option>
+       <option
+         class="custom-font-size-d m-0"
+         *ngFor="let eventTitle of eventSelectedEvents"
+         [value]="eventTitle.id + ',' + eventTitle.event.id"
+       >
+         {{ eventTitle.event.title }}
+       </option>
+     </select>
+     <div class="view-toggle">
+       <label>
+         <input
+           type="radio"
+           (change)="setView('card')"
+           [checked]="currentView === 'card'"
+         />
+         Card View
+       </label>
+       <label>
+         <input
+           type="radio"
+           (change)="setView('table')"
+           [checked]="currentView === 'table'"
+         />
+         Table View
+       </label>
+     </div>
+   </div>
+ <!-- </div> -->
+ 
+  
+    <hr>
+    
+ </div>
+  
+  <div class="load-container" *ngIf="loading">
+     <div class="custom-loader"></div>
+   </div>
+ 
+   <div *ngIf="!loading" class="events-list-container list-background-color">
+     <div
+       [ngClass]="
+         staff.length > 0
+           ? 'list-container'
+           : 'd-flex justify-content-center align-items-center custom-height'
+       "
+     >
+       <!-- Card View -->
+       <div
+         *ngIf="currentView === 'card'"
+         class="events-list-container list-background-color"
+       >
+         <div class="event-card-wrapper" *ngFor="let staff of staff">
+           <app-user-activity-details-card
+             [user]="staff"
+           ></app-user-activity-details-card>
+         </div>
+         <div class="empty-container" *ngIf="staff.length === 0">
+           <p class="m-0">No Activity Found</p>
+         </div>
+       </div>     
+     </div>
+   </div>
+
+   <!-- Table View -->
+   <div class="table" *ngIf="currentView === 'table'">
+     <div class="table-container" *ngIf="staff.length > 0">
+       <table class="table table-bordered">
+         <thead>
+           <tr>
+             <th>Name</th>
+             <th>checkInTime</th>
+             <th>checkOutTime</th>
+             <th>Role</th>
+           </tr>
+         </thead>
+         <tbody>
+           <tr *ngFor="let staff of staff">
+             <td>{{ staff.organzationUser.firstName }}</td>
+             <td>{{ formatTime(staff.checkInTime) }}</td>
+             <td>
+               {{ staff.checkOutTime ? formatTime(staff.checkOutTime) : "N/A" }}
+             </td>
+             <td>{{ staff.eventUser.role }}</td>
+           </tr>
+         </tbody>
+       </table>
+     </div>
+     <div class="empty-container" id="empty-container-table" *ngIf="staff.length === 0">
+       <p class="m-0">No Activity Found</p>
+     </div>
+   </div>
+ 
+ 
+    
+ 

@@ -1,0 +1,19 @@
+<mat-stepper 
+  labelPosition="bottom" 
+  #stepper 
+  [(selectedIndex)]="selectedIndex" 
+  [linear]="isLinear" 
+  class="custom-stepper no-last-line">
+  
+  <mat-step *ngFor="let step of steps; let i = index" 
+            [stepControl]="step.formGroup" 
+            [editable]="isEditable"
+            (click)="onStepClick(i)">
+    <form [formGroup]="step.formGroup">
+      <ng-template matStepLabel>
+        <span [ngClass]="{'done-step': step.isCompleted}">{{ step.label }}</span>
+      </ng-template>
+      <ng-container [ngTemplateOutlet]="step.content"></ng-container>
+    </form>
+  </mat-step>
+</mat-stepper>

@@ -1,0 +1,52 @@
+<div *ngIf="isLoading" class="custom-card">
+  <div>Loading...</div>
+</div>
+
+<div *ngIf="!isLoading" class="custom-card">
+  <div
+    class="custom-card"
+    *ngIf="!(areParticipantsAvailable | async); else participantList"
+  >
+    <img
+      src="../../../assets/images/emptyStatePlaceholder.png"
+      class="empty-state-image mode-sensitive-image"
+    />
+    <div class="empty-state-text">No participants here yet!</div>
+    <button (click)="navigateToAddParticipant()" class="add-participant-button">
+      Add Participant
+    </button>
+  </div>
+</div>
+
+
+
+
+
+<ng-template #participantList>
+  <div class="participant-list-container list-background-color">
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input custom-search-input"
+        placeholder="Search Participant"
+        [(ngModel)]="searchTerm"
+      />
+      <span class="search-icon"><mat-icon>search</mat-icon></span>
+    </div>
+
+    <div
+      class="participant-card-wrapper"
+      *ngFor="let participant of filteredParticipants()"
+    >
+      <app-user-card
+        [firstName]="participant.firstName"
+        [lastName]="participant.lastName"
+        [logoUrl]="participant.logoUrl"
+        [createdOn]="participant.createdOn"
+        (click)="navigateToParticipantDetails(participant.id.toString())"
+      >
+      </app-user-card>     
+    </div>
+  </div>
+  <hr>
+</ng-template>

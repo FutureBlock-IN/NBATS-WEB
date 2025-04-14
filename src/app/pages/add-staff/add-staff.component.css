@@ -1,0 +1,163 @@
+.container {
+  margin: 0 auto;
+  padding: 30px;
+}
+.form-group {
+  margin-bottom: 10px;
+}
+
+.upload-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 10px;
+  padding: 10px;
+  height: 60px;
+}
+
+.file-message-centered {
+  text-align: center;
+  font-weight: bold;
+  color: #333 !important;
+}
+
+.upload-container #fileMessage {
+  flex: 1;
+  padding-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.upload-container button {
+  padding: 3px 7px;
+  border: none;
+  border-radius: 0px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"] {
+  width: 100%;
+  box-sizing: border-box;
+  height: 60px;
+  font-size: 14px;
+}
+input {
+  border-radius: 1 !important;
+}
+input[type="text"]::placeholder,
+input[type="email"]::placeholder,
+input[type="tel"]::placeholder {
+  font-size: 14px;
+  color: #d5d5d5;
+  font-weight: 600;
+}
+.location-container {
+  display: flex;
+  gap: 10px;
+}
+.staff-toggle-container {
+  border-radius: 0;
+  padding: 10px 20px;
+}
+.navigate-btn,
+.save-button {
+  width: 100%;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  text-align: center;
+  border-radius: 0;
+}
+
+.navigate-btn > button,
+.save-button > button {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 40%;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: black;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+.custom-toggle-btn {
+  height: 30px;
+  padding: 0 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toggle-tabs {
+  display: flex;
+  border-radius: 10px;
+}
+
+.toggle-tab {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.events-list-card {
+  text-align: center;
+}
+.name-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  position: relative;
+  overflow: hidden;
+  height: auto;
+}
+.name-container::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: calc(50% - 5px);
+  width: 10px;
+  height: 60px;
+  background-color: #cccccc;
+  z-index: 1;
+}
+.name-container > * {
+  z-index: 2;
+}
+.name-container input {
+  border: none;
+  flex: 1;
+  padding: 10px;
+  outline: none;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.name-container .firstName {
+  border-radius: 10px 0 0 10px !important;
+}
+
+.name-container .lastName {
+  border-radius: 0 10px 10px 0 !important;
+}
+.divider {
+  width: 1px;
+  background-color: #cccccc;
+  height: 100%;
+}

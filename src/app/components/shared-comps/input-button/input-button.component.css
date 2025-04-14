@@ -1,0 +1,31 @@
+.input-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px 15px;
+    gap: 10px;
+    color: #fff;
+    outline: none;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: background-color 400ms, transform 200ms, border-color 400ms;
+    text-decoration: none; /* In case you use this class for <a> elements */
+}
+
+.input-button:hover, .input-button:focus {
+    transform: translateY(-2px);
+}
+
+.input-button:active {
+    transform: translateY(1px);
+}
+
+/* Adjusted to target any i element within .input-button */
+.input-button ::ng-deep i {
+    transition: transform 400ms;
+}
+
+.input-button:hover ::ng-deep i {
+    transform: rotate(360deg);
+}

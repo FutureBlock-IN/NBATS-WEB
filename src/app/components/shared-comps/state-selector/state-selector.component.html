@@ -1,0 +1,34 @@
+<input
+  type="text"
+  placeholder="State (e.g., CA for California)"
+  (input)="onSearch($event)"
+  (ngModelChange)="onAutofill($event)"
+  [matAutocomplete]="auto"
+  [ngModel]="stateFormControl.value"
+  [ngClass]="applyHeight ? 'input-style-50' : 'input-style'"
+/>
+
+<mat-autocomplete
+  #auto="matAutocomplete"
+  (optionSelected)="onStateSelect($event.option.value)"
+>
+  <!-- <mat-option *ngFor="let state of filteredStateOptions" [value]="{iso2: state.iso2, name: state.name}">
+    {{ state.name }} ({{ state.iso2 }})
+  </mat-option> -->
+
+  <mat-option *ngFor="let state of filteredStateOptions" [value]="state.name">
+    {{ state.name }}
+  </mat-option>
+</mat-autocomplete>
+
+<div
+  class="text-danger"
+  *ngIf="stateFormControl.invalid && (stateFormControl.touched || stateFormControl.dirty)"
+>
+  <div *ngIf="stateFormControl.errors?.['required']">
+    State is required.
+  </div>
+  <div *ngIf="stateFormControl.errors?.['invalidState']">
+    Enter a valid state (e.g., California or CA).
+  </div>
+</div>

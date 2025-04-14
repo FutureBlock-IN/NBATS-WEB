@@ -1,0 +1,302 @@
+[
+    {
+        "number": 1,
+        "name": "Alabama",
+        "iso2": "AL",
+        "iso3": "USA-AL"
+    },
+    {
+        "number": 2,
+        "name": "Alaska",
+        "iso2": "AK",
+        "iso3": "USA-AK"
+    },
+    {
+        "number": 3,
+        "name": "Arizona",
+        "iso2": "AZ",
+        "iso3": "USA-AZ"
+    },
+    {
+        "number": 4,
+        "name": "Arkansas",
+        "iso2": "AR",
+        "iso3": "USA-AR"
+    },
+    {
+        "number": 5,
+        "name": "California",
+        "iso2": "CA",
+        "iso3": "USA-CA"
+    },
+    {
+        "number": 6,
+        "name": "Colorado",
+        "iso2": "CO",
+        "iso3": "USA-CO"
+    },
+    {
+        "number": 7,
+        "name": "Connecticut",
+        "iso2": "CT",
+        "iso3": "USA-CT"
+    },
+    {
+        "number": 8,
+        "name": "Delaware",
+        "iso2": "DE",
+        "iso3": "USA-DE"
+    },
+    {
+        "number": 9,
+        "name": "Florida",
+        "iso2": "FL",
+        "iso3": "USA-FL"
+    },
+    {
+        "number": 10,
+        "name": "Georgia",
+        "iso2": "GA",
+        "iso3": "USA-GA"
+    },
+    {
+        "number": 11,
+        "name": "Hawaii",
+        "iso2": "HI",
+        "iso3": "USA-HI"
+    },
+    {
+        "number": 12,
+        "name": "Idaho",
+        "iso2": "ID",
+        "iso3": "USA-ID"
+    },
+    {
+        "number": 13,
+        "name": "Illinois",
+        "iso2": "IL",
+        "iso3": "USA-IL"
+    },
+    {
+        "number": 14,
+        "name": "Indiana",
+        "iso2": "IN",
+        "iso3": "USA-IN"
+    },
+    {
+        "number": 15,
+        "name": "Iowa",
+        "iso2": "IA",
+        "iso3": "USA-IA"
+    },
+    {
+        "number": 16,
+        "name": "Kansas",
+        "iso2": "KS",
+        "iso3": "USA-KS"
+    },
+    {
+        "number": 17,
+        "name": "Kentucky",
+        "iso2": "KY",
+        "iso3": "USA-KY"
+    },
+    {
+        "number": 18,
+        "name": "Louisiana",
+        "iso2": "LA",
+        "iso3": "USA-LA"
+    },
+    {
+        "number": 19,
+        "name": "Maine",
+        "iso2": "ME",
+        "iso3": "USA-ME"
+    },
+    {
+        "number": 20,
+        "name": "Maryland",
+        "iso2": "MD",
+        "iso3": "USA-MD"
+    },
+    {
+        "number": 21,
+        "name": "Massachusetts",
+        "iso2": "MA",
+        "iso3": "USA-MA"
+    },
+    {
+        "number": 22,
+        "name": "Michigan",
+        "iso2": "MI",
+        "iso3": "USA-MI"
+    },
+    {
+        "number": 23,
+        "name": "Minnesota",
+        "iso2": "MN",
+        "iso3": "USA-MN"
+    },
+    {
+        "number": 24,
+        "name": "Mississippi",
+        "iso2": "MS",
+        "iso3": "USA-MS"
+    },
+    {
+        "number": 25,
+        "name": "Missouri",
+        "iso2": "MO",
+        "iso3": "USA-MO"
+    },
+    {
+        "number": 26,
+        "name": "Montana",
+        "iso2": "MT",
+        "iso3": "USA-MT"
+    },
+    {
+        "number": 27,
+        "name": "Nebraska",
+        "iso2": "NE",
+        "iso3": "USA-NE"
+    },
+    {
+        "number": 28,
+        "name": "Nevada",
+        "iso2": "NV",
+        "iso3": "USA-NV"
+    },
+    {
+        "number": 29,
+        "name": "New Hampshire",
+        "iso2": "NH",
+        "iso3": "USA-NH"
+    },
+    {
+        "number": 30,
+        "name": "New Jersey",
+        "iso2": "NJ",
+        "iso3": "USA-NJ"
+    },
+    {
+        "number": 31,
+        "name": "New Mexico",
+        "iso2": "NM",
+        "iso3": "USA-NM"
+    },
+    {
+        "number": 32,
+        "name": "New York",
+        "iso2": "NY",
+        "iso3": "USA-NY"
+    },
+    {
+        "number": 33,
+        "name": "North Carolina",
+        "iso2": "NC",
+        "iso3": "USA-NC"
+    },
+    {
+        "number": 34,
+        "name": "North Dakota",
+        "iso2": "ND",
+        "iso3": "USA-ND"
+    },
+    {
+        "number": 35,
+        "name": "Ohio",
+        "iso2": "OH",
+        "iso3": "USA-OH"
+    },
+    {
+        "number": 36,
+        "name": "Oklahoma",
+        "iso2": "OK",
+        "iso3": "USA-OK"
+    },
+    {
+        "number": 37,
+        "name": "Oregon",
+        "iso2": "OR",
+        "iso3": "USA-OR"
+    },
+    {
+        "number": 38,
+        "name": "Pennsylvania",
+        "iso2": "PA",
+        "iso3": "USA-PA"
+    },
+    {
+        "number": 39,
+        "name": "Rhode Island",
+        "iso2": "RI",
+        "iso3": "USA-RI"
+    },
+    {
+        "number": 40,
+        "name": "South Carolina",
+        "iso2": "SC",
+        "iso3": "USA-SC"
+    },
+    {
+        "number": 41,
+        "name": "South Dakota",
+        "iso2": "SD",
+        "iso3": "USA-SD"
+    },
+    {
+        "number": 42,
+        "name": "Tennessee",
+        "iso2": "TN",
+        "iso3": "USA-TN"
+    },
+    {
+        "number": 43,
+        "name": "Texas",
+        "iso2": "TX",
+        "iso3": "USA-TX"
+    },
+    {
+        "number": 44,
+        "name": "Utah",
+        "iso2": "UT",
+        "iso3": "USA-UT"
+    },
+    {
+        "number": 45,
+        "name": "Vermont",
+        "iso2": "VT",
+        "iso3": "USA-VT"
+    },
+    {
+        "number": 46,
+        "name": "Virginia",
+        "iso2": "VA",
+        "iso3": "USA-VA"
+    },
+    {
+        "number": 47,
+        "name": "Washington",
+        "iso2": "WA",
+        "iso3": "USA-WA"
+    },
+    {
+        "number": 48,
+        "name": "West Virginia",
+        "iso2": "WV",
+        "iso3": "USA-WV"
+    },
+    {
+        "number": 49,
+        "name": "Wisconsin",
+        "iso2": "WI",
+        "iso3": "USA-WI"
+    },
+    {
+        "number": 50,
+        "name": "Wyoming",
+        "iso2": "WY",
+        "iso3": "USA-WY"
+    }
+]

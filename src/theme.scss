@@ -1,0 +1,814 @@
+/* You can add global styles to this file, and also import other style files */
+@use "@angular/material" as mat;
+
+// Light Theme
+$light-theme-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$light-theme-accent: mat.m2-define-palette(
+  mat.$m2-purple-palette,
+  A200,
+  A100,
+  A400
+);
+$light-theme-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$light-theme: mat.m2-define-light-theme(
+  (
+    color: (
+      primary: $light-theme-primary,
+      accent: $light-theme-accent,
+      warn: $light-theme-warn,
+    ),
+    typography: mat.m2-define-typography-config(),
+  )
+);
+
+// Dark Theme
+$dark-theme-primary: mat.m2-define-palette(mat.$m2-indigo-palette);
+$dark-theme-accent: mat.m2-define-palette(
+  mat.$m2-purple-palette,
+  A200,
+  A100,
+  A400
+);
+$dark-theme-warn: mat.m2-define-palette(mat.$m2-red-palette);
+
+$dark-theme: mat.m2-define-dark-theme(
+  (
+    color: (
+      primary: $dark-theme-primary,
+      accent: $dark-theme-accent,
+      warn: $dark-theme-warn,
+    ),
+    typography: mat.m2-define-typography-config(),
+  )
+);
+
+// Dark theme variables
+$dark-bg-color: #333;
+$semi-dark-bg-color: #333;
+$light-text-color: white;
+$default-page-dark-bg-color: #646464;
+$mat-icon-color-light: white;
+$default-text-color-white: white;
+
+// Light theme variables
+$light-bg-color: #ffffff;
+$semi-light-bg-color: #c0c0c0;
+$dark-text-color: #333;
+$default-page-light-bg-color: #f1f0f6;
+$custom-image-holder-bg-light: #f1f0f6;
+$light-input-field-bg-color: #f9f9f9;
+$light-dashed-border-color: #d5d5d5;
+
+.user-activity-date {
+  color: #c4c4c7;
+}
+
+.joined p {
+  color: #c4c4c7;
+}
+
+input[type="radio"] {
+  accent-color: $semi-dark-bg-color;
+}
+
+.p-dropdown .p-dropdown-trigger {
+  width: 1rem;
+  padding-right: 4px;
+}
+
+.p-dropdown .p-dropdown-label {
+  padding: 5px;
+
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.p-dropdown-items {
+  text-align: start;
+  padding: 0;
+}
+
+small {
+  color: red;
+}
+
+// Dark mode
+.dark {
+  @include mat.all-component-colors($dark-theme);
+
+  .border-theme {
+    border: 1px solid $default-text-color-white;
+    border-radius: 10px;
+  }
+
+  .custom-border-theme {
+    border-left: 1px solid $default-text-color-white;
+    border-right: 1px solid $default-text-color-white;
+  }
+
+  background-color: $semi-dark-bg-color;
+  color: $default-text-color-white;
+
+  textarea {
+    color: $light-text-color !important;
+    background: #4a4a4a !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    transition: all 0.3s;
+
+    &:focus {
+      border: 1px solid lighten($light-text-color, 50%) !important;
+      border-radius: 10px !important;
+    }
+
+    &::placeholder {
+      padding-left: 10px;
+      color: #a0a0a0 !important;
+    }
+  }
+
+  .card {
+    background-color: $dark-bg-color !important;
+  }
+
+  .mat-step-icon-state-done {
+    background-color: $dark-text-color;
+  }
+
+  .mat-step-icon-selected {
+    background-color: $default-page-dark-bg-color;
+  }
+
+  input {
+    color: $light-text-color !important;
+    background: #4a4a4a !important;
+    border: none !important;
+    padding: 10px !important;
+    border-radius: 10px !important;
+    transition: all 0.3s;
+
+    &:focus {
+      border: 1px solid lighten($light-text-color, 50%) !important;
+      border-radius: 10px !important;
+    }
+
+    &::placeholder {
+      padding-left: 10px;
+      color: #a0a0a0 !important;
+    }
+  }
+
+  .no-items-container p {
+    color: white;
+  }
+
+  .organization-title {
+    color: white !important;
+  }
+
+  .organization-create-date {
+    color: white !important;
+  }
+
+  .organization-email {
+    color: white !important;
+  }
+
+  .p-calendar .p-datepicker {
+    background: $dark-text-color !important;
+    padding: 5px;
+    border-radius: 4px;
+  }
+
+  .mat-step-icon-state-edit {
+    background-color: #646464 !important;
+  }
+
+  button {
+    color: $dark-text-color !important;
+    background-color: $light-bg-color !important;
+    border: 1px solid $dark-text-color !important;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: lighten($light-bg-color, 10%) !important;
+    }
+
+    &:active {
+      background-color: darken($light-bg-color, 10%) !important;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px lighten($dark-text-color, 20%) !important;
+    }
+
+    &:disabled {
+      filter: grayscale(100%);
+      background-color: darken($light-bg-color, 10%);
+      cursor: not-allowed !important;
+    }
+
+    &.light-variant {
+      color: $light-text-color !important; // Keep light text for contrast
+      background-color: transparent !important; // Darker background for variant
+      border: 1px solid $light-text-color !important; // More prominent border with primary color
+      transition: all 0.3s;
+
+      &:hover {
+        background-color: lighten(
+          $dark-bg-color,
+          5%
+        ) !important; // Slightly lighten on hover
+      }
+
+      &:active {
+        background-color: darken(
+          $dark-bg-color,
+          20%
+        ) !important; // Darker background on active
+      }
+
+      // &:focus {
+      //   outline: none;
+      //   box-shadow: 0 0 0 3px lighten($light-text-color, 20%) !important; // Focus ring with primary color
+      // }
+
+      &:disabled {
+        filter: grayscale(100%);
+        background-color: darken($dark-bg-color, 5%);
+        cursor: not-allowed !important;
+      }
+    }
+  }
+
+  a {
+    color: $light-text-color !important;
+    text-decoration: none !important;
+
+    &:hover {
+      color: lighten($light-text-color, 20%) !important;
+    }
+
+    &:active {
+      color: darken($light-text-color, 20%) !important;
+    }
+
+    &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
+  }
+
+  .step-block {
+    background-color: $light-text-color;
+  }
+
+  .step-block-active-dark {
+    background-color: $semi-dark-bg-color;
+  }
+
+  hr {
+    border: 0.3px solid $light-text-color;
+  }
+
+  .otp-box {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid $light-text-color;
+    border-radius: 4px;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    color: $light-text-color;
+    background-color: $semi-dark-bg-color;
+
+    &.active {
+      border-color: lighten($light-text-color, 20%);
+      box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.25);
+    }
+  }
+
+  #fileMessage {
+    color: white !important;
+  }
+
+  .nav {
+    background-color: $dark-bg-color;
+  }
+
+  .nav-underline .nav-link.active {
+    border-bottom: 2px solid white !important;
+  }
+
+  .nav-pills .nav-link.active-tab {
+    background-color: $semi-dark-bg-color !important;
+  }
+
+  .nav-underline .nav-link.active-tab {
+    font-weight: 700 !important;
+    border-bottom: $light-text-color solid 2px !important;
+  }
+
+  .user-card {
+    background-color: $dark-bg-color !important;
+  }
+
+  .custom-card,
+  .bottom-navbar {
+    background-color: $dark-bg-color !important;
+  }
+
+  .list-card {
+    background-color: $dark-bg-color !important;
+  }
+
+  mat-icon {
+    color: $mat-icon-color-light !important;
+  }
+
+  .profile-image-list {
+    width: 60px;
+    height: 60px;
+    background-color: $semi-dark-bg-color;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1px;
+  }
+
+  .event-card-cantainer {
+    border-bottom: $light-text-color solid 1px;
+  }
+
+  .btn-group {
+    .btn {
+      color: $light-text-color;
+      border: 1px solid $light-text-color;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+    }
+
+    .btn-check:checked + .btn {
+      background-color: $light-text-color;
+      color: $dark-bg-color;
+    }
+  }
+
+  mat-icon {
+    color: $mat-icon-color-light !important;
+  }
+
+  .event-image-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: $semi-dark-bg-color;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+  }
+
+  .theme-container {
+    background-color: $dark-bg-color;
+  }
+
+  .participants-staff-default-img {
+    background-color: $semi-dark-bg-color;
+  }
+
+  .assigning-containers {
+    border-top: 1px solid #0e0f09;
+    border-bottom: 1px solid #0e0f09;
+  }
+
+  .p-dropdown {
+    background-color: $semi-dark-bg-color;
+  }
+
+  .p-dropdown-items {
+    background-color: $dark-bg-color;
+  }
+
+  .p-dropdown-label {
+    color: white;
+  }
+
+  .custom-loader-container {
+    background-color: #ffffff69;
+  }
+
+  .custom-loader {
+    border: 0.4rem solid rgba(0, 0, 0, 0.1);
+    border-left-color: #ffffff;
+  }
+
+  .save-button button:disabled {
+    background-color: $semi-dark-bg-color !important;
+    cursor: not-allowed;
+    border: $semi-dark-bg-color !important;
+    color: #a9a4a4 !important;
+  }
+
+  .mode-sensitive-image {
+    filter: invert(100%) brightness(200%) !important;
+  }
+
+  .upload-container {
+    border: 2px dashed #4a4a4a;
+  }
+
+  .upload-container #fileMessage {
+    color: $semi-dark-bg-color;
+  }
+
+  .toggle-tabs {
+    background-color: $semi-dark-bg-color;
+    border: 4px solid $semi-dark-bg-color;
+  }
+
+  .toggle-tab.active {
+    background-color: $light-bg-color;
+    color: $dark-text-color;
+  }
+
+  .add-guardian-button {
+    border: 2px solid $light-bg-color !important;
+    background-color: $semi-dark-bg-color !important;
+    color: $light-bg-color !important;
+  }
+
+  .mat-horizontal-stepper-header-container {
+    background-color: $dark-bg-color;
+  }
+
+  .list-background-color {
+    background-color: #3e3f40;
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: $semi-light-bg-color !important;
+    font-weight: 700 !important;
+  }
+  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border-color: $semi-light-bg-color !important;
+  }
+
+  // Add styles for titles in dark mode
+  .fw-medium, .fw-normaler {
+    color: #ffffff;
+  }
+}
+
+// Light mode
+.light {
+  @include mat.all-component-themes($light-theme);
+  background-color: $default-text-color-white;
+
+  .border-theme {
+    border: solid 1px $semi-dark-bg-color;
+    border-radius: 10px;
+  }
+
+  .custom-border-theme {
+    border-left: 1px solid $semi-dark-bg-color;
+    border-right: 1px solid $semi-dark-bg-color;
+  }
+
+  textarea {
+    color: $dark-text-color !important;
+    background: $default-page-light-bg-color !important;
+    border: none !important;
+    padding: 10px !important;
+    transition: all 0.3s;
+    border-radius: 10px !important;
+
+    &:focus {
+      border: 1px solid darken($dark-text-color, 20%) !important;
+      border-radius: 10px !important;
+    }
+
+    &::placeholder {
+      padding-left: 10px;
+    }
+  }
+
+  input {
+    color: $dark-text-color !important;
+    background: $light-input-field-bg-color !important;
+    border: none !important;
+    padding: 10px !important;
+    transition: all 0.3s;
+    border-radius: 10px !important;
+
+    &:focus {
+      border: 1px solid darken($dark-text-color, 20%) !important;
+      border-radius: 10px !important;
+    }
+
+    &::placeholder {
+      padding-left: 10px;
+    }
+  }
+
+  input[type="text"]::placeholder,
+  input[type="email"]::placeholder,
+  input[type="tel"]::placeholder {
+    color: $light-dashed-border-color;
+  }
+
+  .p-calendar .p-datepicker {
+    padding: 5px;
+    border-radius: 4px;
+    background: $default-page-light-bg-color !important;
+  }
+
+  button {
+    color: $light-text-color !important;
+    background-color: $dark-bg-color !important;
+    border: 1px solid $light-text-color !important;
+    transition: all 0.3s;
+
+    &:hover {
+      background-color: lighten($dark-bg-color, 10%) !important;
+    }
+
+    &:active {
+      background-color: darken($dark-bg-color, 10%) !important;
+    }
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px lighten($light-text-color, 20%) !important;
+    }
+
+    &:disabled {
+      filter: grayscale(100%);
+      background-color: darken($dark-bg-color, 10%);
+      cursor: not-allowed !important;
+    }
+
+    &.light-variant {
+      background-color: transparent !important;
+      color: $dark-text-color !important;
+      border: 1px solid $dark-text-color !important;
+
+      &:hover {
+        background-color: darken($light-bg-color, 10%) !important;
+      }
+
+      &:active {
+        background-color: lighten($light-bg-color, 10%) !important;
+      }
+
+      // &:focus {
+      //   box-shadow: 0 0 0 3px darken($dark-text-color, 20%) !important;
+      // }
+    }
+  }
+
+  a {
+    color: $dark-text-color !important;
+    text-decoration: none !important;
+
+    &:hover {
+      color: darken($dark-text-color, 20%) !important;
+    }
+
+    &:active {
+      color: lighten($dark-text-color, 20%) !important;
+    }
+
+    &:focus {
+      outline: none;
+      text-decoration: underline;
+    }
+  }
+
+  .step-block {
+    background-color: $semi-light-bg-color;
+  }
+
+  .step-block-active-light {
+    background-color: $semi-dark-bg-color;
+  }
+
+  hr {
+    border: 0.3px solid $semi-dark-bg-color;
+  }
+
+  .otp-box {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 18px;
+    border: 1px solid $dark-text-color;
+    border-radius: 4px;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    color: $dark-text-color;
+    background-color: transparent;
+
+    &.active {
+      border-color: darken($dark-text-color, 20%);
+      box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .nav {
+    background-color: $default-text-color-white;
+  }
+
+  .nav-underline .nav-link.active {
+    border-bottom: 2px solid black !important;
+  }
+
+  .nav-pills .nav-link.active-tab {
+    background-color: $default-page-light-bg-color !important;
+  }
+
+  .nav-underline .nav-link.active-tab {
+    font-weight: 700 !important;
+    border-bottom: $semi-dark-bg-color solid 2px !important;
+  }
+
+  .card {
+    background-color: $default-text-color-white !important;
+  }
+
+  .user-card {
+    background-color: $default-text-color-white !important;
+  }
+
+  .custom-card,
+  .bottom-navbar {
+    background-color: $default-text-color-white !important;
+  }
+
+  .list-card {
+    background-color: $default-text-color-white !important;
+  }
+
+  mat-toolbar {
+    background-color: $default-text-color-white;
+  }
+
+  .event-card-cantainer {
+    border-bottom: $dark-text-color solid 1px;
+  }
+
+  .btn-group {
+    .btn {
+      color: $dark-text-color;
+      border: 1px solid $dark-text-color;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .btn-check:checked + .btn {
+      background-color: $dark-text-color;
+      color: $light-text-color;
+    }
+  }
+
+  .theme-container {
+    background-color: $default-text-color-white;
+  }
+
+  .event-image-container {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: $custom-image-holder-bg-light;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 20px;
+  }
+
+  .participants-staff-default-img {
+    background-color: $custom-image-holder-bg-light;
+  }
+
+  .mat-step-icon-state-edit {
+    background-color: #000000 !important;
+  }
+
+  .assigning-containers {
+    border-top: 1px solid #f1f0f6;
+    border-bottom: 1px solid #f1f0f6;
+  }
+
+  .p-dropdown-items {
+    background-color: $default-text-color-white;
+  }
+
+  .p-dropdown .p-dropdown-label.p-placeholder {
+    color: #c8c7c7 !important;
+  }
+
+  .p-dropdown-label {
+    color: black;
+  }
+
+  .profile-image-list {
+    width: 60px;
+    height: 60px;
+    background-color: $default-page-light-bg-color;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 1px;
+  }
+
+  .custom-loader-container {
+    background-color: #00000069 !important;
+  }
+
+  .custom-loader {
+    border: 0.4rem solid rgba(255, 255, 255, 0.1) !important;
+    border-left-color: #070707 !important;
+  }
+
+  .save-button button:disabled {
+    background-color: $light-input-field-bg-color !important;
+    cursor: not-allowed;
+    border: $light-input-field-bg-color !important;
+    color: #918a8a !important;
+  }
+
+  .mode-sensitive-image {
+    filter: none !important;
+  }
+
+  .upload-container {
+    border: 2px dashed $light-dashed-border-color;
+  }
+
+  .upload-container #fileMessage {
+    color: $light-dashed-border-color;
+  }
+
+  .mat-step-icon-selected {
+    background-color: #000000 !important;
+  }
+
+  .mat-step-icon-state-done {
+    background-color: #c0dcc6 !important;
+  }
+
+  .mat-step-icon .mat-icon {
+    color: #109f31;
+  }
+
+  .mat-step-icon-state-number {
+    background-color: #f9f9f9;
+  }
+
+  .toggle-tabs {
+    background-color: $light-input-field-bg-color;
+    border: 4px solid $light-input-field-bg-color;
+  }
+
+  .toggle-tab.active {
+    background-color: $dark-bg-color;
+    color: $light-text-color;
+  }
+
+  .add-guardian-button {
+    border: 2px solid $dark-bg-color !important;
+    background-color: $default-text-color-white !important;
+    color: $dark-bg-color !important;
+  }
+
+  .mat-horizontal-stepper-header-container {
+    background-color: $default-text-color-white;
+  }
+
+  .list-background-color {
+    background-color: rgb(234, 238, 236);
+  }
+  .mat-mdc-tab.mdc-tab--active .mdc-tab__text-label {
+    color: $semi-dark-bg-color !important;
+    font-weight: 700;
+  }
+  .mat-mdc-tab .mdc-tab-indicator__content--underline {
+    border-color: $semi-dark-bg-color !important;
+  }
+}

@@ -1,0 +1,29 @@
+<div class="event-card-container custom-card">
+  <div class="event-img-container">
+    <img
+      [src]="event.logoUrl"
+      (error)="handleImageError($event)"
+      alt="Event Logo"
+    />
+  </div>
+  <div class="event-info-container">
+    <div class="event-title-container mb-1">
+      <p class="custom-font-size-t m-0">{{ event.title }}</p>
+    </div>
+    <div class="event-content-container" *ngIf="!showDescription">
+      <div class="event-content-sub-container">
+        <mat-icon mat-list-icon class="icon">calendar_today</mat-icon>
+        <p class="custom-font-size-d m-0">{{ event.startDate }}</p>
+      </div>
+      <div class="event-content-sub-container">
+        <mat-icon mat-list-icon class="icon">alarm</mat-icon>
+        <p class="custom-font-size-d m-0">
+          {{ event.startTime }} - {{ event.endTime }}
+        </p>
+      </div>
+    </div>
+    <div class="event-description-container" *ngIf="showDescription">
+      <p class="custom-font-size-d m-0">{{ event.description }}</p>
+    </div>
+  </div>
+</div>

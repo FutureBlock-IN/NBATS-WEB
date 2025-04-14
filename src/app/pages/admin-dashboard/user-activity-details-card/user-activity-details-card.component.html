@@ -1,0 +1,32 @@
+<div class="user-card custom-card">
+  <div class="card-content">
+    <div
+      class="profile-image-list"
+      [ngStyle]="{
+        'background-image': 'url(' + getProfilePlaceholderImageUrl() + ')'
+      }"
+    ></div>
+    <div class="user-info">
+      <div class="user-name">
+        {{ user?.organzationUser?.firstName }}
+        {{ user?.organzationUser?.lastName }}
+      </div>
+      <div class="user-date">
+        <span class="caption-text font-style"
+          >Checked In - {{ formatDate(user?.checkInTime) }}</span
+        >
+      </div>
+      <div class="user-date">
+        <span class="caption-text font-style"
+          >Checked Out -
+          {{
+            user?.checkOutTime
+              ? formatDate(user?.checkOutTime!)
+              : "Not checked out"
+          }}</span
+        >
+      </div>
+    </div>
+  </div>
+  <hr />
+</div>

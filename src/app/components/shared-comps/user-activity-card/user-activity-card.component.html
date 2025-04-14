@@ -1,0 +1,28 @@
+<div class="user-card">
+  <div class="card-content">
+    <div
+      class="profile-image-list"
+      [ngStyle]="{
+        'background-image': 'url(' + getProfilePlaceholderImageUrl() + ')'
+      }"
+    ></div>
+    <div class="user-info">
+      <div class="user-name">
+        <span class="font-style">{{ user?.organzationUser?.firstName }}</span>
+        <span class="font-style">{{ user?.organzationUser?.lastName }}</span>
+      </div>
+      <div class="user-activit-date">
+        <span class="caption-txt font-style">Checked In - {{ formatDate(user?.checkInTime) }}</span>
+      </div>
+      <div class="user-activit-date">
+        <span class="caption-tex font-style">Checked Out - {{ user?.checkOutTime ? formatDate(user?.checkOutTime!) : 'Not checked out' }}</span>
+      </div>
+      <span id="joined" class="font-style"><p class="caption-tet">{{ user?.eventUser?.role?.toLowerCase() }} since : {{formatOnlyDate(user?.organzationUser?.createdOn)}}</p></span>
+
+    </div>
+</div>
+<!-- <div class="joined">
+    <span class="font-style"><p class="caption-tet">{{ user?.eventUser?.role?.toLowerCase() }} since : {{formatOnlyDate(user?.organzationUser?.createdOn)}}</p></span>
+</div> -->
+  <hr />
+</div>

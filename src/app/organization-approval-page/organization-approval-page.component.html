@@ -1,0 +1,18 @@
+<div class="main-container">
+  <!-- Display the loading spinner when isLoading is true -->
+  <ng-container *ngIf="isLoading; else messageContent">
+    <div class="loading-spinner-container">
+      <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+    </div>
+  </ng-container>
+
+  <!-- Content to display when loading is complete -->
+  <ng-template #messageContent>
+    <div *ngIf="message" class="card" [ngClass]="{'error-card': isError, 'success-card': !isError}">
+      <h2 *ngIf="!isError">Organization Approved!</h2>
+      <h2 *ngIf="isError">Approval Failed</h2>
+      <p>{{ message }}</p>
+      <p *ngIf="!isError && organizationName">Organization Name: <strong>{{ organizationName }}</strong></p>
+    </div>
+  </ng-template>
+</div>

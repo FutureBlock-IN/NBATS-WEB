@@ -1,0 +1,238 @@
+<div class="user-details-card">
+  <div class="profile-image-container">
+    <img 
+      [src]="changedImage || user.logoUrl || getDefaultUserImage()" 
+      alt="Profile Picture" 
+      class="profile-image"
+    >
+    <button class="change-photo-btn" (click)="onChangePhotoClick()">Change Photo</button>
+    <input 
+      type="file" 
+      #fileInput 
+      accept="image/*" 
+      (change)="onFileSelected($event)" 
+      style="display: none;">
+      <div *ngIf="fileErrorMessage" class="text-danger">
+        {{ fileErrorMessage }}
+      </div>
+  </div>
+  
+  <form class="user-details-form" (ngSubmit)="onSaveChanges()">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <div class="form-group">
+          <label for="firstName">First Name<span class="required">*</span></label>
+          <input
+            type="text"
+            id="firstName"
+            [(ngModel)]="user.firstName"
+            name="firstName"
+            class="form-control"
+            #firstNameRef="ngModel"
+            required
+            maxlength="50"
+          />
+
+          <div *ngIf="firstNameRef.invalid && firstNameRef.touched" class="text-danger">
+            <div *ngIf="firstNameRef.errors?.['required']">
+              {{validationMessages.firstName['required']}}
+            </div>
+            <div *ngIf="firstNameRef.errors?.['maxlength']">
+              {{validationMessages.firstName['maxlength']}}
+            </div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label for="lastName">Last Name<span class="required">*</span></label>
+          <input type="text" 
+            id="lastName" 
+            [(ngModel)]="user.lastName" 
+            name="lastName" 
+            class="form-control"
+            #lastNameRef="ngModel"
+            required
+            maxlength="50"
+            >
+
+            <div *ngIf="lastNameRef.invalid && lastNameRef.touched" class="text-danger">
+              <div *ngIf="lastNameRef.errors?.['required']">
+                {{validationMessages.lastName['required']}}
+              </div>
+              <div *ngIf="lastNameRef.errors?.['maxlength']">
+                {{validationMessages.lastName['maxlength']}}
+              </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email<span class="required">*</span></label>
+          <input 
+            type="email" 
+            id="email" 
+            [(ngModel)]="user.email" 
+            name="email" 
+            class="form-control"
+            #emailRef="ngModel"
+            required
+            maxlength="100"
+            validEmail
+          >
+          <div *ngIf="emailRef.invalid && emailRef.touched" class="text-danger">
+            <div *ngIf="emailRef.errors?.['required']">
+              {{validationMessages.email['required']}}
+            </div>
+            <div *ngIf="emailRef.errors?.['maxlength']">
+              {{validationMessages.email['maxlength']}}
+            </div>
+            <div *ngIf="emailRef.errors?.['invalidEmail']">
+              {{validationMessages.email['email']}}
+            </div>            
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="phone">Phone<span class="required">*</span></label>
+          <input 
+            type="tel" 
+            id="phone" 
+            [(ngModel)]="user.phone" 
+            name="phone" 
+            class="form-control"
+            #phoneRef="ngModel"
+            required
+            validPhoneNumber
+            >
+
+          <div *ngIf="phoneRef.invalid && phoneRef.touched" class="text-danger">
+            <div *ngIf="phoneRef.errors?.['required']">
+              {{validationMessages.phone['required']}}
+            </div>
+            <div *ngIf="phoneRef.errors?.['invalidPhoneNumber']">
+              {{validationMessages.phone['pattern']}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-sm-12">
+
+        <div class="form-group">
+          <label for="address">Address<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="address" 
+            [(ngModel)]="user.address" 
+            name="address" 
+            class="form-control"
+            #addressRef="ngModel"
+            required
+            maxlength="256"
+          >
+
+          <div *ngIf="addressRef.invalid && addressRef.touched" class="text-danger">
+            <div *ngIf="addressRef.errors?.['required']">
+              {{validationMessages.address['required']}}
+            </div>
+            <div *ngIf="addressRef.errors?.['maxlength']">
+              {{validationMessages.address['maxlength']}}
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-6">
+            <div class="form-group">
+              <label for="city">City<span class="required">*</span></label>
+              <input 
+                type="text" 
+                id="city" 
+                [(ngModel)]="user.city" 
+                name="city" 
+                class="form-control"
+                #cityRef="ngModel"
+                required
+                maxlength="50"
+              >
+
+              <div *ngIf="cityRef.invalid && cityRef.touched" class="text-danger">
+                <div *ngIf="cityRef.errors?.['required']">
+                  {{validationMessages.city['required']}}
+                </div>
+                <div *ngIf="cityRef.errors?.['maxlength']">
+                  {{validationMessages.city['maxlength']}}
+                </div>
+              </div>
+    
+            </div>
+          </div>
+
+          <div class="col-6">
+            <div class="form-group">
+              <label for="state">State<span class="required">*</span></label>
+              <div class="state-selector-container">
+                <app-state-selector 
+                  [selectedStateIso2]="user.state" 
+                  (stateChange)="onStateChange($event)"
+                  class="small-state-selector"
+                ></app-state-selector>
+              </div>
+            </div>
+          </div>
+
+        </div>
+        
+        <div class="form-group">
+          <label for="zip">ZIP Code<span class="required">*</span></label>
+          <input 
+            type="text" 
+            id="zip" 
+            [(ngModel)]="user.zip" 
+            name="zip" 
+            class="form-control"
+            #zipRef="ngModel"
+            required
+            maxlength="5"
+            (input)="allowOnlyNumbers($event)" 
+            >
+
+            <div *ngIf="zipRef.invalid && zipRef.touched" class="text-danger">
+              <div *ngIf="zipRef.errors?.['required']">
+                {{validationMessages.zip['required']}} 
+              </div>
+              <div *ngIf="zipRef.errors?.['pattern']">
+                {{validationMessages.zip['pattern']}}
+              </div>
+            </div>
+
+        </div>
+
+        <div class="form-group" *ngIf="user.role.toLowerCase() !== 'participant'">
+          <label>Role</label>
+
+          <div class="toggle-tabs">
+            <div class="toggle-tab" [class.active]="user.role.toLowerCase() === 'admin'" (click)="user.role = 'admin'">Admin</div>
+            <div class="toggle-tab" [class.active]="user.role.toLowerCase() === 'staff'" (click)="user.role = 'staff'">Staff</div>
+          </div>
+
+          <div *ngIf="!user.role" class="text-danger">
+            {{ validationMessages.role["required"] }}
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- <button type="submit" class="save-btn mt-3">Save Changes</button> -->
+    <button class="py-2 mt-2" type="submit" [disabled]="isLoading">
+      <ng-container *ngIf="!isLoading">
+        Save Changes <i class="fas fa-arrow-right"></i>
+      </ng-container>
+      <ng-container *ngIf="isLoading">
+        <i class="fas fa-spinner fa-spin"></i> Saving...
+      </ng-container>
+    </button>
+    
+  </form>
+</div>

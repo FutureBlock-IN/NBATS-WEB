@@ -1,0 +1,54 @@
+<div *ngIf="showSearchBar" class="search-container" id="search-staf-pat">
+  <input
+    type="text"
+    class="search-input custom-search-input"
+    placeholder="Search names"
+    [(ngModel)]="searchTerm"
+  />
+  <i class="fas fa-search search-icon"></i>
+</div>
+
+<div class="assigning-containers">
+  <ng-container *ngIf="isLoading">
+    <div class="loading-container">
+      <div class="custom-loader"></div>
+      <p class="loading-text">Loading {{itemType}}...</p>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isLoading">
+    <ng-container *ngIf="items && items.length > 0; else noItems">
+      <div
+        *ngFor="let item of filteredRoles()"
+        class="participants-staff-default-img-container"
+        (click)="onSelect(item)"
+      >
+        <div
+          class="participants-staff-default-img"
+          [ngStyle]="getBackgroundStyle(item.logoUrl, defaultImageUrl)"
+        >
+          <mat-icon *ngIf="!isSelected(item.id)" class="add-icon-camera"
+            >add_circle_outline</mat-icon
+          >
+          <mat-icon
+            *ngIf="isSelected(item.id)"
+            class="add-icon-camera green-color"
+            >check_circle</mat-icon
+          >
+        </div>
+        <div class="staff-name">{{ getTruncatedTitle(item) }}</div>
+      </div>
+    </ng-container>
+    <ng-template #noItems>
+      <div class="no-items-container">
+        <div class="no-items-message">
+          <!-- <p class="no-items-title">{{ noItemsMessage.title || 'No ' + itemType + ' added yet' }}</p> -->
+          <p class="no-items-description">{{ noItemsMessage.description }}</p>
+          <button *ngIf="showAddButton" class="add-button" (click)="onAddClick()">
+            <i class="fas fa-plus"></i> Add {{ itemType | titlecase }}
+          </button>
+        </div>
+      </div>
+    </ng-template>
+  </ng-container>
+</div>

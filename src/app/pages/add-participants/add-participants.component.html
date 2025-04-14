@@ -1,0 +1,664 @@
+<app-circular-stepper
+  [steps]="steps"
+  [isLinear]="true"
+  [isEditable]="false"
+  [selectedIndex]="0"
+  [stepsLength]="3"
+></app-circular-stepper>
+<!-- Enter Details Form -->
+<ng-template #participantTemplate>
+  <form
+    [formGroup]="enterDetailsForm"
+    (ngSubmit)="onSubmitParticipant()"
+    class="container custom-card"
+  >
+    <div class="form-group">
+      <label for="fileUpload">Upload File</label>
+      <div class="upload-container">
+        <span
+          id="fileMessage"
+          [ngClass]="{
+            'file-message': true,
+            'file-message-centered': selectedFileName
+          }"
+        >
+          {{
+            selectedFileName
+              ? selectedFileName.length > 50
+                ? selectedFileName.slice(0, 40) + "..."
+                : selectedFileName
+              : "JPEG, JPG, PNG, Max 3mb"
+          }}
+        </span>
+        <input
+          type="file"
+          id="fileUpload"
+          #fileUpload
+          (change)="onFileSelected($event)"
+          hidden
+        />
+        <button
+          type="button"
+          id="chooseFileButton"
+          (click)="fileUpload.click()"
+        >
+          Choose File
+        </button>
+      </div>
+      <div *ngIf="fileErrorMessage" class="text-danger">
+        {{ fileErrorMessage }}
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="name">Name<span class="required">*</span></label>
+      <div class="name-container">
+        <div>
+          <input
+            type="text"
+            class="firstName"
+            formControlName="firstName"
+            placeholder="FIRSTNAME"
+            required
+          />
+          <div
+            *ngIf="
+              enterDetailsForm.get('firstName')?.touched &&
+              enterDetailsForm.get('firstName')?.invalid
+            "
+            class="text-danger"
+          >
+            <div
+              *ngIf="enterDetailsForm.get('firstName')?.errors?.['required']"
+            >
+              {{ validationMessages.firstName.required }}
+            </div>
+            <div
+              *ngIf="enterDetailsForm.get('firstName')?.errors?.['maxlength']"
+            >
+              {{ validationMessages.firstName.maxlength }}
+            </div>
+          </div>
+        </div>
+        <div>
+          <input
+            type="text"
+            class="lastName"
+            formControlName="lastName"
+            placeholder="LASTNAME"
+            required
+          />
+          <div
+            *ngIf="
+              enterDetailsForm.get('lastName')?.touched &&
+              enterDetailsForm.get('lastName')?.invalid
+            "
+            class="text-danger"
+          >
+            <div *ngIf="enterDetailsForm.get('lastName')?.errors?.['required']">
+              {{ validationMessages.lastName.required }}
+            </div>
+            <div
+              *ngIf="enterDetailsForm.get('lastName')?.errors?.['maxlength']"
+            >
+              {{ validationMessages.lastName.maxlength }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email<span class="required">*</span></label>
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="EMAIL"
+        required
+      />
+      <div
+        *ngIf="
+          enterDetailsForm.get('email')?.touched &&
+          enterDetailsForm.get('email')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="enterDetailsForm.get('email')?.errors?.['required']">
+          {{ validationMessages.email.required }}
+        </div>
+        <div *ngIf="enterDetailsForm.get('email')?.errors?.['email']">
+          {{ validationMessages.email.email }}
+        </div>
+        <div *ngIf="enterDetailsForm.get('email')?.errors?.['maxlength']">
+          {{ validationMessages.email.maxlength }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="phone">Phone<span class="required">*</span></label>
+      <input type="tel" formControlName="phone" placeholder="PHONE" required />
+      <div
+        *ngIf="
+          enterDetailsForm.get('phone')?.touched &&
+          enterDetailsForm.get('phone')?.invalid
+        "
+        class="text-danger"
+      >
+        <small *ngIf="enterDetailsForm.get('phone')?.hasError('required')">
+          {{ validationMessages.phone.required }}
+        </small>
+        <small
+          *ngIf="
+            !enterDetailsForm.get('phone')?.hasError('required') &&
+            enterDetailsForm.get('phone')?.hasError('invalidPhoneNumber')
+          "
+        >
+          {{ validationMessages.phone.pattern }}
+        </small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="address">Address<span class="required">*</span></label>
+      <input
+        type="text"
+        formControlName="address"
+        placeholder="ADDRESS"
+        required
+      />
+      <div
+        *ngIf="
+          enterDetailsForm.get('address')?.touched &&
+          enterDetailsForm.get('address')?.invalid
+        "
+        class="text-danger"
+      >
+        <div *ngIf="enterDetailsForm.get('address')?.errors?.['required']">
+          {{ validationMessages.address.required }}
+        </div>
+        <div *ngIf="enterDetailsForm.get('address')?.errors?.['maxlength']">
+          {{ validationMessages.address.maxlength }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group city-zip-container">
+      <div class="city-container">
+        <label for="city">City<span class="required">*</span></label>
+        <input type="text" formControlName="city" placeholder="CITY" required />
+        <div
+          *ngIf="
+            enterDetailsForm.get('city')?.touched &&
+            enterDetailsForm.get('city')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="enterDetailsForm.get('city')?.errors?.['required']">
+            {{ validationMessages.city.required }}
+          </div>
+          <div *ngIf="enterDetailsForm.get('city')?.errors?.['maxlength']">
+            {{ validationMessages.city.maxlength }}
+          </div>
+        </div>
+      </div>
+
+      <div class="form-group" style="flex: 1">
+        <label for="state">State<span class="required">*</span></label>
+        <app-state-selector
+          [selectedStateIso2]="enterDetailsForm.get('state')?.value"
+          (stateChange)="onStateChange($event)"
+        ></app-state-selector>
+        <div
+          *ngIf="
+            enterDetailsForm.get('state')?.touched &&
+            enterDetailsForm.get('state')?.invalid
+          "
+          class="text-danger"
+        >
+          {{ validationMessages.state.required }}
+        </div>
+      </div>
+
+      <div class="zip-container">
+        <label for="zip">Zip<span class="required">*</span></label>
+        <input type="text" formControlName="zip" placeholder="ZIP" required />
+        <div
+          *ngIf="
+            enterDetailsForm.get('zip')?.touched &&
+            enterDetailsForm.get('zip')?.invalid
+          "
+          class="text-danger"
+        >
+          <div *ngIf="enterDetailsForm.get('zip')?.errors?.['required']">
+            {{ validationMessages.zip.required }}
+          </div>
+          <div *ngIf="enterDetailsForm.get('zip')?.errors?.['pattern']">
+            {{ validationMessages.zip.pattern }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="w-100" />
+    <div class="next-navigation-container save-button">
+      <button
+        class="navigate-btn"
+        (click)="markAllAsTouched()"
+        [disabled]="enterDetailsForm.invalid"
+      >
+        Next <i class="fas fa-arrow-right"></i>
+      </button>
+    </div>
+  </form>
+</ng-template>
+
+<!-- Age Verification Form -->
+<ng-template #ageVerificationTemplate>
+  <div class="custom-height position-relative custom-card">
+    <div class="container custom-card">
+      <div class="form-group">
+        <label>Are you 14 or below?</label>
+        <div
+          class="toggle-tabs"
+          [ngClass]="{ 'disabled-toggle': isFirstGuardianAdded }"
+        >
+          <div
+            class="toggle-tab"
+            [class.active]="isUnder14 === true"
+            (click)="onUnder14Toggle(true)"
+            [class.disabled]="isFirstGuardianAdded"
+          >
+            Yes
+          </div>
+          <div
+            class="toggle-tab"
+            [class.active]="isUnder14 === false"
+            (click)="onUnder14Toggle(false)"
+            [class.disabled]="isFirstGuardianAdded"
+          >
+            No
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Guardian Form -->
+      <form
+        *ngIf="isUnder14"
+        [formGroup]="firstGuardianForm"
+        (ngSubmit)="onSubmitGuardian()"
+      >
+        <div class="title-style">ADD GUARDIAN</div>
+        <div class="form-box" [ngClass]="{ 'disabled-form': !isUnder14 }">
+          <!-- Guardian Fields -->
+          <div class="form-group">
+            <label for="name">Name<span class="required">*</span></label>
+            <div class="name-container">
+              <div>
+                <input
+                  type="text"
+                  class="firstName"
+                  formControlName="guardianFirstName"
+                  placeholder="FIRSTNAME"
+                  required
+                />
+                <div
+                  *ngIf="
+                    firstGuardianForm.get('guardianFirstName')?.touched &&
+                    firstGuardianForm.get('guardianFirstName')?.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div
+                    *ngIf="firstGuardianForm.get('guardianFirstName')?.errors?.['required']"
+                  >
+                    {{ validationMessages.firstName.required }}
+                  </div>
+                  <div
+                    *ngIf="firstGuardianForm.get('guardianFirstName')?.errors?.['maxlength']"
+                  >
+                    {{ validationMessages.firstName.maxlength }}
+                  </div>
+                </div>
+              </div>
+              <div>
+                <input
+                  type="text"
+                  class="lastName"
+                  formControlName="guardianLastName"
+                  placeholder="LASTNAME"
+                  required
+                />
+                <div
+                  *ngIf="
+                    firstGuardianForm.get('guardianLastName')?.touched &&
+                    firstGuardianForm.get('guardianLastName')?.invalid
+                  "
+                  class="text-danger"
+                >
+                  <div
+                    *ngIf="firstGuardianForm.get('guardianLastName')?.errors?.['required']"
+                  >
+                    {{ validationMessages.lastName.required }}
+                  </div>
+                  <div
+                    *ngIf="firstGuardianForm.get('guardianLastName')?.errors?.['maxlength']"
+                  >
+                    {{ validationMessages.lastName.maxlength }}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="guardianEmail"
+              >Email<span class="required">*</span></label
+            >
+            <input
+              type="email"
+              formControlName="guardianEmail"
+              placeholder="EMAIL"
+              required
+            />
+            <div
+              *ngIf="
+                firstGuardianForm.get('guardianEmail')?.touched &&
+                firstGuardianForm.get('guardianEmail')?.invalid
+              "
+              class="text-danger"
+            >
+              <div
+                *ngIf="firstGuardianForm.get('guardianEmail')?.errors?.['required']"
+              >
+                {{ validationMessages.email.required }}
+              </div>
+              <div
+                *ngIf="firstGuardianForm.get('guardianEmail')?.errors?.['email']"
+              >
+                {{ validationMessages.email.email }}
+              </div>
+              <div
+                *ngIf="firstGuardianForm.get('guardianEmail')?.errors?.['maxlength']"
+              >
+                {{ validationMessages.email.maxlength }}
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="guardianPhone"
+              >Phone<span class="required">*</span></label
+            >
+            <input
+              type="tel"
+              formControlName="guardianPhone"
+              placeholder="PHONE"
+              required
+            />
+            <div
+              *ngIf="
+                firstGuardianForm.get('guardianPhone')?.touched &&
+                firstGuardianForm.get('guardianPhone')?.invalid
+              "
+              class="text-danger"
+            >
+              <small
+                *ngIf="
+                  firstGuardianForm.get('guardianPhone')?.hasError('required')
+                "
+                >{{ validationMessages.phone.required }}</small
+              >
+              <small
+                *ngIf="
+                  !firstGuardianForm
+                    .get('guardianPhone')
+                    ?.hasError('required') &&
+                  firstGuardianForm
+                    .get('guardianPhone')
+                    ?.hasError('invalidPhoneNumber')
+                "
+                >{{ validationMessages.phone.pattern }}</small
+              >
+            </div>
+          </div>
+
+          <!-- Conditionally display the second guardian form -->
+          <form *ngIf="showSecondGuardian" [formGroup]="secondGuardianForm">
+            <div class="title-style">ADD SECOND GUARDIAN</div>
+            <div class="form-group">
+              <label for="guardianName"
+                >Name<span class="required">*</span></label
+              >
+              <div class="name-container">
+                <div>
+                  <input
+                    type="text"
+                    class="firstName"
+                    formControlName="guardianFirstName"
+                    placeholder="FIRSTNAME"
+                    required
+                  />
+                  <div
+                    *ngIf="
+                      secondGuardianForm.get('guardianFirstName')?.touched &&
+                      secondGuardianForm.get('guardianFirstName')?.invalid
+                    "
+                    class="text-danger"
+                  >
+                    <div
+                      *ngIf="secondGuardianForm.get('guardianFirstName')?.errors?.['required']"
+                    >
+                      {{ validationMessages.firstName.required }}
+                    </div>
+                    <div
+                      *ngIf="secondGuardianForm.get('guardianFirstName')?.errors?.['maxlength']"
+                    >
+                      {{ validationMessages.firstName.maxlength }}
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <input
+                    type="text"
+                    class="lastName"
+                    formControlName="guardianLastName"
+                    placeholder="LASTNAME"
+                    required
+                  />
+                  <div
+                    *ngIf="
+                      secondGuardianForm.get('guardianLastName')?.touched &&
+                      secondGuardianForm.get('guardianLastName')?.invalid
+                    "
+                    class="text-danger"
+                  >
+                    <div
+                      *ngIf="secondGuardianForm.get('guardianLastName')?.errors?.['required']"
+                    >
+                      {{ validationMessages.lastName.required }}
+                    </div>
+                    <div
+                      *ngIf="secondGuardianForm.get('guardianLastName')?.errors?.['maxlength']"
+                    >
+                      {{ validationMessages.lastName.maxlength }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="guardianEmail"
+                >Email<span class="required">*</span></label
+              >
+              <input
+                type="email"
+                formControlName="guardianEmail"
+                placeholder="EMAIL"
+                required
+              />
+              <div
+                *ngIf="
+                  secondGuardianForm.get('guardianEmail')?.touched &&
+                  secondGuardianForm.get('guardianEmail')?.invalid
+                "
+                class="text-danger"
+              >
+                <div
+                  *ngIf="secondGuardianForm.get('guardianEmail')?.errors?.['required']"
+                >
+                  {{ validationMessages.email.required }}
+                </div>
+                <div
+                  *ngIf="secondGuardianForm.get('guardianEmail')?.errors?.['email']"
+                >
+                  {{ validationMessages.email.email }}
+                </div>
+                <div
+                  *ngIf="secondGuardianForm.get('guardianEmail')?.errors?.['maxlength']"
+                >
+                  {{ validationMessages.email.maxlength }}
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="guardianPhone"
+                >Phone<span class="required">*</span></label
+              >
+              <input
+                type="tel"
+                formControlName="guardianPhone"
+                placeholder="PHONE"
+                required
+              />
+              <div
+                *ngIf="
+                  secondGuardianForm.get('guardianPhone')?.touched &&
+                  secondGuardianForm.get('guardianPhone')?.invalid
+                "
+                class="text-danger"
+              >
+                <small
+                  *ngIf="
+                    secondGuardianForm
+                      .get('guardianPhone')
+                      ?.hasError('required')
+                  "
+                  >{{ validationMessages.phone.required }}</small
+                >
+                <small
+                  *ngIf="
+                    !secondGuardianForm
+                      .get('guardianPhone')
+                      ?.hasError('required') &&
+                    secondGuardianForm
+                      .get('guardianPhone')
+                      ?.hasError('invalidPhoneNumber')
+                  "
+                  >{{ validationMessages.phone.pattern }}</small
+                >
+              </div>
+            </div>
+          </form>
+
+          <!-- Toggle Add/Remove Guardian Button -->
+          <div class="form-group">
+            <a
+              type="button"
+              class="add-guardian-button"
+              (click)="toggleSecondGuardian()"
+            >
+              {{
+                showSecondGuardian
+                  ? "Remove Second Guardian"
+                  : "Add Second Guardian"
+              }}
+            </a>
+          </div>
+
+          <hr class="w-100" />
+          <div class="next-container-schedule save-button">
+            <button
+              class="navigate-btn"
+              type="button"
+              (click)="goPreviousForm()"
+            >
+              <i class="fas fa-arrow-left"></i> Back
+            </button>
+            <button
+              class="navigate-btn"
+              type="submit"
+              (click)="markGuardiansAsTouched()"
+              [disabled]="
+                firstGuardianForm.invalid || secondGuardianForm.invalid
+              "
+            >
+              Next <i class="fas fa-arrow-right"></i>
+            </button>
+          </div>
+        </div>
+      </form>
+
+      <div *ngIf="!isUnder14" class="save-button-not-minor">
+        <hr class="w-100" />
+        <div class="next-container-schedule">
+          <button class="navigate-btn" type="button" (click)="goPreviousForm()">
+            <i class="fas fa-arrow-left"></i> Back
+          </button>
+          <button
+            class="navigate-btn"
+            type="submit"
+            (click)="markGuardiansAsTouched()"
+          >
+            Next <i class="fas fa-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+<ng-template #eventTemplate>
+  <div class="page-container">
+    <div class="content-wrapper">
+      <label for="Events" class="eventLabel">Events</label>
+      <hr class="w-100" />
+      <div class="events-list-card">
+        <app-item-selector
+          [items]="events"
+          [defaultImageUrl]="'../../../../assets/images/eventPlaceholder.jpg'"
+          [isLoading]="isLoadingEvents"
+          itemType="event"
+          [noItemsMessage]="{
+            title: 'No Events',
+            description: 'Please Add'
+          }"
+          [showSearchBar]="false"
+          (select)="onEventSelect($event)"
+        ></app-item-selector>
+      </div>
+      <hr class="w-100" />
+    </div>
+    <div class="next-container-schedule">
+      <button class="navigate-btn" type="button" (click)="goPreviousForm()">
+        <i class="fas fa-arrow-left"></i> Back
+      </button>
+      <!-- <button class="navigate-btn" type="submit" (click)="usersCreationAndAttachToEvents()"> Next <i class="fas fa-arrow-right"></i></button> -->
+      <button
+        class="navigate-btn"
+        (click)="usersCreationAndAttachToEvents()"
+        [disabled]="isParticipantsCreating"
+      >
+        <ng-container *ngIf="!isParticipantsCreating">
+          Save
+          <!-- <i class="fas fa-arrow-right"></i> -->
+        </ng-container>
+        <ng-container *ngIf="isParticipantsCreating">
+          <i class="fas fa-spinner fa-spin"></i> Saving...
+        </ng-container>
+      </button>
+    </div>
+  </div>
+</ng-template>

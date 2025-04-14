@@ -1,0 +1,15 @@
+<div class="content">
+  <div class="nav-container">
+    <ul class="nav nav-underline">
+      <li class="nav-item" *ngFor="let step of steps; let i = index">
+        <a href="#" class="nav-link" [class.active]="selectedIndex === i" (click)="onClick(i); $event.preventDefault()">
+          <span>{{step.label}}</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div  *ngIf="selected">
+  <ng-container [ngTemplateOutlet]="selected.content"></ng-container>
+</div>

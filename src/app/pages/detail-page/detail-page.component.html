@@ -1,0 +1,27 @@
+<div class="container">
+  <button class="btn btn-primary" id="btn-logout" (click)="logout()">
+    <i class="fas fa-sign-out"></i> Log Out
+  </button>
+  <div class="logo-container">
+    <p class="organization-email">logged in as:&nbsp;&nbsp;<span class="email-bold">{{ email }}</span></p>
+    <img [src]="logoImageUrl" alt="Organization Logo" class="logo-image" />
+    <p class="organization-title">{{ title }}</p>
+    <p class="organization-create-date">{{ createdDate }}</p>
+  </div>
+  <div class="theme-toggle-container">
+    <div class="theme-toggle-row">
+      <label for="themeToggle" class="theme-toggle-label">Dark Theme: </label>
+
+      <mat-slide-toggle
+        [checked]="themeService.themeSignal() === 'dark'"
+        (change)="toggleTheme()"
+        class="theme-toggle-icon"
+        color="primary"
+      >
+      </mat-slide-toggle>
+    </div>
+  </div>
+  <button class="btn btn-primary" (click)="dashboard()">Dashbaord</button>
+
+  <button class="btn btn-primary" (click)="home()">Home</button>
+</div>

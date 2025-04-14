@@ -1,0 +1,53 @@
+<div class="container custom-card">
+  <div *ngIf="currentEvent">
+    <app-event-card
+      [event]="currentEvent"
+      [showDescription]="true"
+    ></app-event-card>
+  </div>
+
+  <!-- Scanner section -->
+  <div>
+    <p style="margin-top: 30px">Scan Your QR Code</p>
+    <div class="scanner-container">
+      <!-- Keep the scanner active without changing the UI after scanning -->
+      <zxing-scanner
+        [start]="true"
+        [enable]="isScannerActive"
+        (scanSuccess)="handleScanSuccess($event)"
+        style="width: 100%"
+      ></zxing-scanner>
+
+      <!-- Conditional buttons based on check-in/check-out phase -->
+      <div class="save-button">
+        <!-- Show Start Checkout button during check-in phase -->
+        <!-- <button *ngIf="checkInStarted && !checkoutStarted" class="primary-button" (click)="startCheckOut()">Start Checkout</button> -->
+
+        <button
+          *ngIf="checkInStarted && !checkoutStarted && eventType !== 'Check_in'"
+          class="primary-button"
+          (click)="startCheckOut()"
+        >
+          Start Checkout
+        </button>
+
+        <!-- Show End Event button during check-out phase -->
+        <button
+          *ngIf="checkoutStarted"
+          class="primary-button"
+          (click)="endEvent()"
+        >
+          End Event
+        </button>
+
+        <button
+          *ngIf="eventType === 'Check_in'"
+          class="primary-button"
+          (click)="endEvent()"
+        >
+          End Event
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

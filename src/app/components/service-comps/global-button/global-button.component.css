@@ -1,0 +1,24 @@
+.animated-background-button {
+    padding: 5px 10px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    background-image: linear-gradient(45deg, #e75c8f 50%, #d6aaba 50%);
+    background-size: 200% 100%;
+    background-position: right bottom;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.animated-background-button:hover {
+    background-position: left bottom;
+}
+
+.animated-background-button p {
+    margin: 0; /* Remove default margin of p tag */
+    font-size: inherit; /* Inherit font size from button */
+}

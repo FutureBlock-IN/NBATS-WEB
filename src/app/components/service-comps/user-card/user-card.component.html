@@ -1,0 +1,15 @@
+<div class="user-card custom-card">
+  <div class="card-content">
+    <div
+      class="profile-image-list"
+      [ngStyle]="{
+        'background-image': 'url(' + getProfilePlaceholderImageUrl() + ')'
+      }"
+    ></div>
+    <div class="user-info">
+      <div class="user-name">{{ firstName }} {{ lastName }}</div>
+      <div class="user-date">Joined {{ formatDate(createdOn) }}</div>
+    </div>
+  </div>
+  <hr />
+</div>

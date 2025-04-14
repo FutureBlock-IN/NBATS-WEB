@@ -1,0 +1,611 @@
+<!-- Global Stepper Component -->
+<app-circular-stepper
+  [steps]="steps"
+  [isLinear]="true"
+  [isEditable]="false"
+  [selectedIndex]="0"
+  [stepsLength]="3"
+></app-circular-stepper>
+
+<!-- Step 1: Event Information -->
+<ng-template #eventTemplate>
+  <form [formGroup]="eventForm" (ngSubmit)="validateEventdetailForm()">
+    <div class="event-info-container theme-container">
+      <!-- Event Info Loader -->
+      <div *ngIf="isEventDTOLoading" class="custom-loader-container">
+        <div class="custom-loader"></div>
+      </div>
+
+      <!-- Event Image -->
+      <div class="input-container">
+        <p class="fw-normaler m-0 mb-2 mt-4 fw-medium">Upload Image</p>
+        <div class="upload-container">
+          <span
+            id="fileMessage"
+            [ngClass]="{
+              'file-message': true,
+              'file-message-centered': selectedFileName
+            }"
+          >
+            {{
+              selectedFileName
+                ? selectedFileName.length > 50
+                  ? selectedFileName.slice(0, 40) + "..."
+                  : selectedFileName
+                : "JPEG, JPG, PNG, Max 3mb"
+            }}
+          </span>
+          <input
+            type="file"
+            id="fileUpload"
+            #fileUpload
+            name="fileUpload"
+            (change)="onFileSelected($event)"
+            hidden
+          />
+          <button
+            type="button"
+            id="chooseFileButton"
+            (click)="fileUpload.click()"
+          >
+            Choose File
+          </button>
+        </div>
+        <div *ngIf="fileErrorMessage" class="text-danger">
+          {{ fileErrorMessage }}
+        </div>
+      </div>
+
+      <!-- Event Title -->
+      <div class="input-container">
+        <p class="fw-normaler m-0 mb-2 mt-4 fw-medium">
+          Title<span class="required">*</span>
+        </p>
+        <input type="text" class="w-100" formControlName="title" />
+        <div
+          *ngIf="
+            eventForm.get('title')?.invalid && eventForm.get('title')?.touched
+          "
+        >
+          <small class="text-danger">{{
+            validationMessages.title.required
+          }}</small>
+        </div>
+      </div>
+      <!-- Event Description -->
+      <div class="input-container">
+        <p class="fw-normaler m-0 mb-2 mt-4 fw-medium">
+          Description<span class="required">*</span>
+        </p>
+        <textarea class="w-100" formControlName="description"></textarea>
+        <div
+          *ngIf="
+            eventForm.get('description')?.invalid &&
+            eventForm.get('description')?.touched
+          "
+        >
+          <small class="text-danger">{{
+            validationMessages.description.required
+          }}</small>
+        </div>
+      </div>
+      <!-- Check Type Radio Buttons -->
+      <div class="input-container">
+        <p class="fw-medium m-0 mb-2 mt-4 fw-medium">
+          Type<span class="required">*</span>
+        </p>
+        <div class="type-toggle-container">
+          <div
+            class="btn-group w-100"
+            role="group"
+            aria-label="Check In/Out Toggle"
+          >
+            <input
+              type="radio"
+              class="btn-check"
+              id="checkIn"
+              formControlName="checkType"
+              name="checkType"
+              value="Check_in"
+            />
+            <label
+              class="btn btn-outline-primary custom-toggle-btn"
+              for="checkIn"
+              >Check-In</label
+            >
+            <input
+              type="radio"
+              class="btn-check"
+              id="checkOut"
+              formControlName="checkType"
+              name="checkType"
+              value="Check_out"
+            />
+            <label
+              class="btn btn-outline-primary custom-toggle-btn"
+              for="checkOut"
+              >Check-In & Check-Out</label
+            >
+          </div>
+        </div>
+      </div>
+      <!-- Location -->
+      <div class="input-container">
+        <p class="fw-normaler m-0 mb-2 mt-4 fw-medium">
+          Location<span class="required">*</span>
+        </p>
+        <textarea class="w-100" formControlName="location"></textarea>
+        <div
+          *ngIf="
+            eventForm.get('location')?.invalid &&
+            eventForm.get('location')?.touched
+          "
+        >
+          <small class="text-danger">{{
+            validationMessages.location.required
+          }}</small>
+        </div>
+      </div>
+      <!-- Status Radio Buttons -->
+      <div class="input-container">
+        <p class="fw-medium m-0 mb-2 mt-4 fw-medium">
+          Status<span class="required">*</span>
+        </p>
+        <div class="type-toggle-container">
+          <div class="btn-group w-100" role="group" aria-label="Status Toggle">
+            <input
+              type="radio"
+              class="btn-check"
+              id="Active"
+              formControlName="statusType"
+              name="statusType"
+              value="Active"
+            />
+            <label
+              class="btn btn-outline-primary custom-toggle-btn"
+              for="Active"
+              >Active</label
+            >
+            <input
+              type="radio"
+              class="btn-check"
+              id="InActive"
+              formControlName="statusType"
+              name="statusType"
+              value="Inactive"
+            />
+            <label
+              class="btn btn-outline-primary custom-toggle-btn"
+              for="InActive"
+              >Inactive</label
+            >
+          </div>
+        </div>
+      </div>
+      <hr class="w-100" />
+      <!-- Navigation Button -->
+      <div class="next-navigation-container save-button">
+        <button
+          class="navigate-btn"
+          (click)="markAllAsTouched()"
+          [disabled]="eventForm.invalid"
+        >
+          Next
+          <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<!-- Step 2: Setup Scheduling -->
+<ng-template #scheduleTemplate>
+  <form
+    [formGroup]="scheduleForm"
+    class="position-relative"
+    (ngSubmit)="validateSchedulleForm()"
+  >
+    <div *ngIf="isEventScheduleDtoLoading" class="custom-loader-container">
+      <div class="custom-loader"></div>
+    </div>
+
+    <div
+      class="event-scheduling-container theme-container"
+      [ngClass]="{ 'h-auto': isRecurringSelected() }"
+    >
+      <div class="h-100">
+        <!-- Repeat Option -->
+        <div class="repeat-title mt-4">
+          <p class="fw-medium m-0">Event Type</p>
+        </div>
+        <div class="event-type-toggle-container">
+          <div
+            class="btn-group w-100"
+            role="group"
+            aria-label="Once/Recurring Toggle"
+          >
+            <input
+              type="radio"
+              class="btn-check"
+              name="isRecurring"
+              id="Once"
+              autocomplete="off"
+              [value]="false"
+              formControlName="isRecurring"
+            />
+            <label class="btn btn-outline-primary custom-toggle-btn" for="Once"
+              >Once</label
+            >
+            <input
+              type="radio"
+              class="btn-check"
+              name="isRecurring"
+              id="Recurring"
+              autocomplete="off"
+              [value]="true"
+              formControlName="isRecurring"
+            />
+            <label
+              class="btn btn-outline-primary custom-toggle-btn"
+              for="Recurring"
+              >Recurring</label
+            >
+          </div>
+        </div>
+        <!-- Start Date -->
+        <div class="time-date-duration-container">
+          <div class="date">
+            <p class="fw-medium m-0">
+              Start Date<span class="required">*</span>
+            </p>
+            <div class="input-container-date-and-time">
+              <div class="calender-input-container">
+                <p-calendar
+                  appendTo="body"
+                  [baseZIndex]="10000"
+                  formControlName="startDate"
+                  iconDisplay="input"
+                  showIcon="true"
+                >
+                </p-calendar>
+                <!-- Error Message for Start Date -->
+                <div
+                  *ngIf="
+                    scheduleForm.get('startDate')?.invalid &&
+                    scheduleForm.get('startDate')?.touched
+                  "
+                  class="text-danger error-container"
+                >
+                  {{ validationMessages.startDate.required }}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- End Date -->
+          <div class="date">
+            <p
+              class="fw-medium m-0"
+              [ngClass]="
+                !scheduleForm.get('isRecurring')!.value
+                  ? 'custom-disabled-color'
+                  : null
+              "
+            >
+              End Date
+              <span
+                *ngIf="scheduleForm.get('isRecurring')!.value"
+                class="required"
+                >*</span
+              >
+            </p>
+
+            <div class="input-container-date-and-time">
+              <div class="calender-input-container">
+                <p-calendar
+                  appendTo="body"
+                  [baseZIndex]="10000"
+                  [disabled]="!scheduleForm.get('isRecurring')!.value"
+                  formControlName="endDate"
+                  iconDisplay="input"
+                  showIcon="true"
+                >
+                </p-calendar>
+                <!-- Error Message for End Date -->
+                <div
+                  *ngIf="
+                    scheduleForm.get('endDate')?.invalid &&
+                    scheduleForm.get('endDate')?.touched &&
+                    scheduleForm.get('endDate')?.enabled
+                  "
+                  class="text-danger error-container"
+                >
+                  {{ validationMessages.endDate.required }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Time Selection -->
+        <div class="time-container">
+          <div class="startTime-container d-inline-block">
+            <div class="time-tile-container">
+              <p class="fw-medium m-0">Time<span class="required">*</span></p>
+            </div>
+            <p-dropdown
+              formControlName="startTime"
+              [options]="timeSlots"
+              placeholder="11:00PM"
+              optionLabel="label"
+              optionValue="value"
+            >
+              ></p-dropdown
+            >
+            <!-- Error Message for Start Time -->
+            <div
+              *ngIf="
+                scheduleForm.get('startTime')?.hasError('required') &&
+                scheduleForm.get('startTime')?.touched
+              "
+              class="text-danger"
+            >
+              {{ validationMessages.startTime.required }}
+            </div>
+            <div
+              *ngIf="!scheduleForm.get('startTime')?.hasError('required') && 
+                        scheduleForm.get('startTime')?.errors?.['timeInvalid'] && 
+                        scheduleForm.get('startTime')?.touched"
+              class="text-danger error-container error-message-width"
+            >
+              {{ validationMessages.timeInvalid.invalid }}
+            </div>
+          </div>
+
+          <div class="Duration d-inline-block">
+            <div class="time-tile-container">
+              <p class="fw-medium m-0">
+                Duration<span class="required">*</span>
+              </p>
+            </div>
+            <p-dropdown
+              formControlName="duration"
+              [options]="hours"
+              placeholder="1 hour"
+              optionLabel="label"
+              optionValue="value"
+            >
+              ></p-dropdown
+            >
+            <!-- Error Message for Duration -->
+            <div
+              *ngIf="
+                scheduleForm.get('duration')?.invalid &&
+                scheduleForm.get('duration')?.touched
+              "
+              class="text-danger"
+            >
+              {{ validationMessages.duration.required }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Repeat Schedule -->
+        <div class="w-100 mt-5" *ngIf="scheduleForm.get('isRecurring')?.value">
+          <div class="repeat-container py-2">
+            <div class="repeat-inputs-containers">
+              <input
+                type="radio"
+                name="repeat"
+                value="Daily"
+                formControlName="repeat"
+              />
+              <label class="fw-medium" for="Daily">DAILY</label>
+            </div>
+            <div class="repeat-inputs-containers">
+              <input
+                type="radio"
+                name="repeat"
+                value="Weekly"
+                formControlName="repeat"
+              />
+              <label class="fw-medium" for="Weekly">WEEKLY</label>
+            </div>
+          </div>
+          <!-- Error Message for Repeat -->
+          <div
+            *ngIf="
+              scheduleForm.get('repeat')?.invalid &&
+              scheduleForm.get('repeat')?.touched
+            "
+            class="text-danger text-center"
+          >
+            {{ validationMessages.repeat.required }}
+          </div>
+        </div>
+
+        <!-- Weekdays -->
+        <div class="w-100 mt-5" *ngIf="scheduleForm.get('isRecurring')?.value">
+          <p class="fw-medium repeat-title">Select Days</p>
+          <div class="weekdays-container px-2 py-2">
+            <div
+              formGroupName="weekdays"
+              class="weekday-input-containers btn-group custom-btn-grp"
+              role="group"
+              aria-label="Weekday Toggle"
+            >
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="Mon"
+                formControlName="mon"
+              />
+              <label class="btn btn-outline-primary custom-btn" for="Mon"
+                >MON</label
+              >
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="Tue"
+                formControlName="tue"
+              />
+              <label class="btn btn-outline-primary custom-btn" for="Tue"
+                >TUE</label
+              >
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="Wed"
+                formControlName="wed"
+              />
+              <label class="btn btn-outline-primary custom-btn" for="Wed"
+                >WED</label
+              >
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="Thu"
+                formControlName="thu"
+              />
+              <label class="btn btn-outline-primary custom-btn" for="Thu"
+                >THU</label
+              >
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="Fri"
+                formControlName="fri"
+              />
+              <label class="btn btn-outline-primary custom-btn" for="Fri"
+                >FRI</label
+              >
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="Sat"
+                formControlName="sat"
+              />
+              <label class="btn btn-outline-primary custom-btn" for="Sat"
+                >SAT</label
+              >
+
+              <input
+                type="checkbox"
+                class="btn-check"
+                id="Sun"
+                formControlName="sun"
+              />
+              <label class="btn btn-outline-primary custom-btn" for="Sun"
+                >SUN</label
+              >
+            </div>
+            <!-- Error Message for Weekdays -->
+            <div
+              *ngIf="
+                scheduleForm.get('weekdays')?.invalid &&
+                scheduleForm.get('weekdays')?.touched
+              "
+              class="text-danger"
+            >
+              {{ validationMessages.day.required }}
+            </div>
+            <div
+              class="text-danger"
+              *ngIf="scheduleForm.errors?.['invalidWeekdays'] && scheduleForm.touched"
+            >
+              {{ validationMessages.weekdays.invalid }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div class="next-container-schedule save-button">
+        <button class="navigate-btn" (click)="GoPreviousForm()">
+          <i class="fas fa-arrow-left"></i> Back
+        </button>
+        <button
+          class="navigate-btn"
+          (click)="markAllAsTouchedSchedule()"
+          [disabled]="scheduleForm.invalid"
+        >
+          Next <i class="fas fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+  </form>
+</ng-template>
+
+<!-- Step 3: Staff -->
+<ng-template #participantsTemplate>
+  <div class="staff-participants-container theme-container">
+    <!-- <div> -->
+      <div class="assign-section my-5">
+        <div id="assi-title" class="assign-title">
+          <p class="fw-medium ps-5">Staff</p>
+        </div>
+        <div class="assigning-containers">
+          <app-item-selector
+          [items]="staff"
+          [isLoading]="isStaffListLoading"
+          [defaultImageUrl]="'../../../../assets/images/userPlaceholder.jpg'"
+          itemType="staff"
+          [noItemsMessage]="{
+            title: '',
+            description: 'Please add staff to the event'
+          }"
+           (add)="addStaff()"
+          (select)="onStaffSelect($event)"
+        ></app-item-selector>
+        </div>
+      </div>
+
+      <div class="assign-section">
+        <div id="assi-title" class="assign-title">
+          <p class="fw-medium ps-5">Participants</p>
+        </div>
+        <div class="assigning-containers">
+          <app-item-selector
+          [items]="participants"
+          [isLoading]="isParticipantListLoading"
+          [defaultImageUrl]="'../../../../assets/images/userPlaceholder.jpg'"
+          itemType="participant"
+          [noItemsMessage]="{
+            title: '',
+            description:
+              'Please add participants to the event'
+          }"
+          (add)="addParticipant()"
+          (select)="onParticipantSelect($event)"
+        ></app-item-selector>
+        </div>
+      </div>
+      <hr>
+    </div>
+  <!-- </div> -->
+  <!-- <hr /> -->
+
+  <div class="next-navigation-container-assigning theme-container">
+    <button class="navigate-btn" (click)="GoScheduleForm()">
+      <i class="fas fa-arrow-left"></i> Back
+    </button>
+     <button
+      class="navigate-btn"
+      (click)="createEventObject()"
+      [disabled]="isEventCreating"
+    >
+      <ng-container *ngIf="!isEventCreating">
+        Save
+        
+      </ng-container>
+      <ng-container *ngIf="isEventCreating">
+        <i class="fas fa-spinner fa-spin"></i> Saving...
+      </ng-container>
+    </button>
+  </div>
+ 
+</ng-template>

@@ -1,0 +1,55 @@
+<div *ngIf="isLoading">
+  <div class="loading-container">
+    <div class="spinner"></div>
+    <p>Loading...</p>
+  </div>
+</div>
+
+<div *ngIf="!isLoading" class="custom-card">
+  <mat-tab-group class="custom-tabs">
+    <mat-tab>
+      <ng-template mat-tab-label>
+        {{ isParticipantRoute ? 'Participant Details' : 'Staff Details' }}
+      </ng-template>
+      <app-user-details-card
+        *ngIf="participant"
+        (saveChanges)="onSaveChanges($event)"
+        [user]="participant"
+      >
+      </app-user-details-card>
+      <p *ngIf="!participant">No user details found.</p>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        Events
+      </ng-template>
+      <div class="events-container">
+        <div class="events-list-card">
+          <app-item-selector
+            [items]="events"
+            [defaultImageUrl]="'../../../../assets/images/eventPlaceholder.jpg'"
+            [isLoading]="isLoadingEvents"
+            itemType="event"
+            [selectedIds]="selectedEventIds"
+            [noItemsMessage]="{
+              title: 'No Events',
+              description: 'Please Add'
+            }"
+            (select)="onEventSelect($event)"
+            [showSearchBar]="false"
+          >
+          </app-item-selector>
+        </div>
+      </div>
+      <div class="w-100 d-flex justify-content-center">
+        <button class="custom-btn w-100 py-2 mt-4" (click)="navigateToHome()">
+          Save
+        </button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<div *ngIf="!isLoading && !participant">
+  <p>No participant details found.</p>
+</div>

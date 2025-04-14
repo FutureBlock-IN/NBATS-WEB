@@ -1,0 +1,45 @@
+<div *ngIf="isLoading" class="custom-card">
+  <div>Loading...</div>
+</div>
+
+<div *ngIf="!isLoading" class="custom-card">
+  <div
+    class="custom-card"
+    *ngIf="!(areEventsAvailable | async); else eventList"
+  >
+    <img
+      src="../../../assets/images/emptyStatePlaceholder.png"
+      class="empty-state-image mode-sensitive-image"
+    />
+    <div class="empty-state-text">No events here yet!</div>
+    <button (click)="navigateToAddEvent()" class="add-event-button">
+      Add Event
+    </button>
+  </div>
+</div>
+
+<ng-template #eventList>
+  <div class="events-list-container list-background-color">
+    <div class="search-container">
+      <input
+        type="text"
+        class="search-input custom-search-input"
+        placeholder="Search Events"
+        [(ngModel)]="searchTerm"
+      />
+      <span class="search-icon"><mat-icon>search</mat-icon></span>
+    </div>
+    <div
+      class="event-card-wrapper"
+      *ngFor="let event of filteredParticipants()"
+    >
+        <app-event-card
+        [event]="event"
+        (click)="navigateToEventDetailsPage(event)"
+      ></app-event-card>
+
+      
+    </div>
+  </div>
+  <hr>
+</ng-template>

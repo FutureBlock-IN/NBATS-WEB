@@ -1,0 +1,6 @@
+<button class="icon-button" 
+        [ngStyle]="{'color': appColors.primaryColor}" 
+        (mouseover)="buttonColor = appColors.iconButtonHoverColor" 
+        (mouseleave)="buttonColor = appColors.IconButtonIHoverColor">
+    <mat-icon>{{iconName}}</mat-icon>
+</button>
