@@ -556,7 +556,7 @@
           itemType="staff"
           [noItemsMessage]="{
             title: '',
-            description: 'Please add staff to the event'
+            description: 'Please save event and go to main menu to add staff and assign to event'
           }"
            (add)="addStaff()"
           (select)="onStaffSelect($event)"
@@ -577,7 +577,7 @@
           [noItemsMessage]="{
             title: '',
             description:
-              'Please add participants to the event'
+              'Please save event and go to main menu to add participant and assign to event'
           }"
           (add)="addParticipant()"
           (select)="onParticipantSelect($event)"

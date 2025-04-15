@@ -41,13 +41,12 @@
     </ng-container>
     <ng-template #noItems>
       <div class="no-items-container">
-        <div class="no-items-message">
-          <!-- <p class="no-items-title">{{ noItemsMessage.title || 'No ' + itemType + ' added yet' }}</p> -->
-          <p class="no-items-description">{{ noItemsMessage.description }}</p>
-          <button *ngIf="showAddButton" class="add-button" (click)="onAddClick()">
-            <i class="fas fa-plus"></i> Add {{ itemType | titlecase }}
-          </button>
-        </div>
+        <span style="font-weight: bold; font-size: 20px">{{
+          noItemsMessage.title
+        }}</span>
+        <p style="font-weight: normal; font-size: 14px">
+          {{ noItemsMessage.description }}
+        </p>
       </div>
     </ng-template>
   </ng-container>

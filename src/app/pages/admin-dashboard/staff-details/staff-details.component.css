@@ -22,11 +22,13 @@
 
 .title-container {
   height: 50px;
+  margin-top: 5px;
 }
 
 .title-container p {
   font-size: 20px;
   text-align: center;
+  /* margin-top: 9px; */
 }
 
 .events-list-container {
